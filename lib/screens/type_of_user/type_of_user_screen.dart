@@ -38,7 +38,7 @@ class _TypeOfUserState extends State<TypeOfUser> {
           builder: (context, state) {
             return SingleChildScrollView(
               child: Container(
-                color: mBackgroundColor,
+                color: mMainColor,
                 width: pageWidth,
                 height: pageHeight,
                 child: Padding(
@@ -68,7 +68,7 @@ class _TypeOfUserState extends State<TypeOfUser> {
                             decoration: const BoxDecoration(
                               image: DecorationImage(
                                   image: AssetImage("assets/images/owner.png"),
-                                  fit: BoxFit.cover),
+                                  fit: BoxFit.contain),
                             ),
                             child: Align(
                               child: Container(
@@ -117,7 +117,7 @@ class _TypeOfUserState extends State<TypeOfUser> {
                               image: DecorationImage(
                                   image:
                                       AssetImage("assets/images/players.jpeg"),
-                                  fit: BoxFit.cover),
+                                  fit: BoxFit.contain),
                             ),
                              child: Align(
                               child: Container(
