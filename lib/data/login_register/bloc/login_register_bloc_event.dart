@@ -25,4 +25,16 @@ class PlayerSignUpEvent extends LoginRegisterBlocEvent {
   });
 }
 
+class LogoutEvent extends LoginRegisterBlocEvent{
+
+}
+
+class LoginSuccessEvent extends LoginRegisterBlocEvent{
+  final String email;
+  final String password;
+
+  LoginSuccessEvent(this.email, this.password);
+
+}
+
 
