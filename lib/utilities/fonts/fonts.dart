@@ -14,3 +14,15 @@ TextStyle inFont = GoogleFonts.poppins(
   color: mPrimaryColor,
   decoration: TextDecoration.none,
 );
+
+TextStyle loginText = GoogleFonts.poppins(
+  fontSize: 9,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+);
+
+TextStyle loginFontButton = GoogleFonts.staatliches(
+  fontSize: 12,
+  color: mPrimaryColor,
+  decoration: TextDecoration.none,
+);

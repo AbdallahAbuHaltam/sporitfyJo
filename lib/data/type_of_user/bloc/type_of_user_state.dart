@@ -6,16 +6,16 @@ sealed class TypeOfUserState {}
 
 final class TypeOfUserInitial extends TypeOfUserState {}
 
-class ChoosingOwner extends TypeOfUserState {
+class ChoosingOwnerState extends TypeOfUserState {
   final bool isOwner;
-  ChoosingOwner({
+  ChoosingOwnerState({
     required this.isOwner,
   });
 }
 
-class ChoosingPlayer extends TypeOfUserState {
+class ChoosingPlayerState extends TypeOfUserState {
   final bool isOwner;
-  ChoosingPlayer({
+  ChoosingPlayerState({
     required this.isOwner,
   });
   

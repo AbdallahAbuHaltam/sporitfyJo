@@ -8,10 +8,10 @@ class TypeOfUserBloc extends Bloc<TypeOfUserEvent, TypeOfUserState> {
   TypeOfUserBloc() : super(TypeOfUserInitial()) {
     on<UserTypeEvent>((event, emit) {
       if(event.isOwner){
-        emit(ChoosingOwner(isOwner: true));
+        emit(ChoosingOwnerState(isOwner: true));
       }
       else{
-        emit(ChoosingPlayer(isOwner: false));
+        emit(ChoosingPlayerState(isOwner: false));
       }
     });
   }

@@ -4,7 +4,7 @@ import 'package:sportify/data/type_of_user/bloc/type_of_user_bloc.dart';
 
 import '../../utilities/fonts/fonts.dart';
 import '../../utilities/utilities.dart';
-import '../auth/login.dart';
+import '../authentication/login/login.dart';
 
 class TypeOfUser extends StatefulWidget {
   const TypeOfUser({super.key});
@@ -23,12 +23,12 @@ class _TypeOfUserState extends State<TypeOfUser> {
       child: Scaffold(
         body: BlocConsumer<TypeOfUserBloc, TypeOfUserState>(
           listener: (context, state) {
-            if (state is ChoosingOwner) {
+            if (state is ChoosingOwnerState) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const LoginPage(isOwner: true)));
-            } else if (state is ChoosingPlayer) {
+            } else if (state is ChoosingPlayerState) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
