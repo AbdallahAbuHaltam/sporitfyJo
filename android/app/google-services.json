@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1084383844994",
+    "project_id": "sportifyjo-aa8a6",
+    "storage_bucket": "sportifyjo-aa8a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084383844994:android:79fde9f44a35b895dfb29b",
+        "android_client_info": {
+          "package_name": "com.example.sportify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO10fytV1gy3ClwHqq148xxfsbeW-yOOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
