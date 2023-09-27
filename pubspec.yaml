@@ -38,6 +38,11 @@ dependencies:
   bloc: ^8.1.2
   flutter_bloc: ^8.1.3
   google_fonts: ^6.1.0
+  flutter_native_splash: ^2.3.2
+  google_fonts:
+  intl_phone_field: ^3.2.0
+  image_picker: ^1.0.4
+
 
 dev_dependencies:
   flutter_test:
