@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportify/data/type_of_user/bloc/type_of_user_bloc.dart';
 
 import '../../utilities/fonts/fonts.dart';
-import '../../utilities/utilities.dart';
+import '../../utilities/colors/utilities.dart';
 import '../authentication/login/login.dart';
 
 class TypeOfUser extends StatefulWidget {

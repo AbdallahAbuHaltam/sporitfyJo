@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
-import 'package:sportify/screens/shared_widget/text_form_field.dart';
 import 'package:sportify/screens/shared_widget/widgets.dart';
-import 'package:sportify/utilities/colors/colors.dart';
-import 'package:sportify/utilities/fonts/fonts.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+
+import '../../../utilities/colors/utilities.dart';
+import '../../../utilities/fonts/fonts.dart';
 
 bool capitalLetterValid = false;
 bool specialCharacterValid = false;
@@ -39,13 +39,13 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
     double pageWidth = MediaQuery.of(context).size.width;
     double pageHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: mBackgroundColor,
       appBar: AppBar(
         title: Text(
-          "Register",
+          "RegisterO",
           style: appBarFont,
         ),
-        backgroundColor: mPrimaryColor,
+        backgroundColor: mMainColor,
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -71,12 +71,12 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                         ),
                         labelText: "Email",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.email_outlined,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                       ),
                       keyboardType: TextInputType.emailAddress,
@@ -109,12 +109,12 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                         ),
                         labelText: "Password",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.lock,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -126,7 +126,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                                 !_isObsecure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: mPrimaryColor)),
+                                color: mMainColor)),
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       keyboardType: TextInputType.visiblePassword,
@@ -160,14 +160,14 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        labelText: "confirm Password",
+                        labelText: "Confirm Password",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.lock,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -179,7 +179,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                               !_isObsecure2
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: mPrimaryColor,
+                              color: mMainColor,
                             )),
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -203,14 +203,14 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                         focusedBorder: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        labelText: " User name ",
+                        labelText: " Username ",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.person_2_rounded,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                       ),
                       keyboardType: TextInputType.name,
@@ -228,7 +228,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                     child: IntlPhoneField(
                       dropdownIcon: const Icon(
                         Icons.arrow_drop_down,
-                        color: mPrimaryColor,
+                        color: mMainColor,
                       ),
                       controller: _phoneNumberController,
                       validator: (value) {
@@ -248,7 +248,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                       cursorColor: mPrimaryColor,
                       decoration: InputDecoration(
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -290,12 +290,12 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                         ),
                         labelText: "Token ID",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.add_moderator_outlined,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                       ),
                       keyboardType: TextInputType.number,
@@ -311,7 +311,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         foregroundColor:
-                            MaterialStateProperty.all<Color>(white),
+                            MaterialStateProperty.all<Color>(mBackgroundColor),
                         backgroundColor:
                             MaterialStateProperty.all<Color>(mPrimaryColor),
                         shape:

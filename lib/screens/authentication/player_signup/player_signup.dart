@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/screens/shared_widget/widgets.dart';
-import 'package:sportify/utilities/colors/colors.dart';
-import 'package:sportify/utilities/fonts/fonts.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../../utilities/colors/utilities.dart';
+import '../../../utilities/fonts/fonts.dart';
 
 class PlayerSignUp extends StatefulWidget {
   const PlayerSignUp({super.key});
@@ -56,10 +57,10 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
     double pageWidth = MediaQuery.of(context).size.width;
     double pageHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: mBackgroundColor,
       appBar: AppBar(
         title: Text(
-          "Register",
+          "RegisterP",
           style: appBarFont,
         ),
         backgroundColor: mPrimaryColor,
@@ -316,7 +317,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                     child: ElevatedButton(
                       style: ButtonStyle(
                         foregroundColor:
-                            MaterialStateProperty.all<Color>(white),
+                            MaterialStateProperty.all<Color>(mBackgroundColor),
                         backgroundColor:
                             MaterialStateProperty.all<Color>(mPrimaryColor),
                         shape:

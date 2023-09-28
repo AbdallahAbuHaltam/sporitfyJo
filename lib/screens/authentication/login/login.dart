@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sportify/utilities/utilities.dart';
+import 'package:sportify/utilities/colors/utilities.dart';
 
 import '../../../utilities/fonts/fonts.dart';
+import '../owner_signup/owner_signup.dart';
+import '../player_signup/player_signup.dart';
 import 'login_function.dart';
 
 class LoginPage extends StatefulWidget {
@@ -160,23 +162,24 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          // if (widget.isOwner == true) {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) =>
-                          //           const OwnerSignUpPage(),
-                          //     ),
-                          //   );
-                          // } else {
-                          //   Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) =>
-                          //           const CustomerSignUpPage(),
-                          //     ),
-                          //   );
-                          // }
+                          if (widget.isOwner == true) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const OwnerSignUp(),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const PlayerSignUp(),
+                                      ),
+                                    );
+                                  }
+                         
                         },
                         child: Text(
                           "Register",
