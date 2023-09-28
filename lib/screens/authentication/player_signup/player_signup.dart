@@ -63,7 +63,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
           "RegisterP",
           style: appBarFont,
         ),
-        backgroundColor: mPrimaryColor,
+        backgroundColor: mMainColor,
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -89,12 +89,12 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                         ),
                         labelText: "Email",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.email_outlined,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                       ),
                       keyboardType: TextInputType.emailAddress,
@@ -127,12 +127,12 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                         ),
                         labelText: "Password",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.lock,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -144,7 +144,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                                 !_isObsecure
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: mPrimaryColor)),
+                                color: mMainColor)),
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       keyboardType: TextInputType.visiblePassword,
@@ -180,12 +180,12 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                         ),
                         labelText: "confirm Password",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.lock,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -197,7 +197,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                               !_isObsecure2
                                   ? Icons.visibility
                                   : Icons.visibility_off,
-                              color: mPrimaryColor,
+                              color: mMainColor,
                             )),
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -223,12 +223,12 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                         ),
                         labelText: " User name ",
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         isDense: true,
                         prefixIcon: const Icon(
                           Icons.person_2_rounded,
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                       ),
                       keyboardType: TextInputType.name,
@@ -246,7 +246,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                     child: IntlPhoneField(
                       dropdownIcon: const Icon(
                         Icons.arrow_drop_down,
-                        color: mPrimaryColor,
+                        color: mMainColor,
                       ),
                       controller: _phoneNumberController,
                       validator: (value) {
@@ -263,10 +263,10 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                       },
                       initialCountryCode: "JO",
                       focusNode: focusNode,
-                      cursorColor: mPrimaryColor,
+                      cursorColor: mMainColor,
                       decoration: InputDecoration(
                         labelStyle: const TextStyle(
-                          color: mPrimaryColor,
+                          color: mMainColor,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
