@@ -26,15 +26,25 @@ class SignUpFunction {
     return null;
   }
 
-  static bool isPasswordValid(String password) {
+   static bool isPasswordValid(String password) {
     RegExp uppercaseRegex = RegExp(r'[A-Z]');
     RegExp specialCharRegex = RegExp(r'[!@#$%^&*]');
     RegExp digitRegex = RegExp(r'\d');
 
-    bool capitalLetterValid = uppercaseRegex.hasMatch(password);
-    bool specialCharacterValid = specialCharRegex.hasMatch(password);
-    bool numberValid = digitRegex.hasMatch(password);
+    capitalLetterValid = uppercaseRegex.hasMatch(password);
+    specialCharacterValid = specialCharRegex.hasMatch(password);
+    numberValid = digitRegex.hasMatch(password);
 
     return capitalLetterValid && specialCharacterValid && numberValid;
+  }
+
+  static String? validatePassword(value) {
+    if (value!.isEmpty ||
+        capitalLetterValid == false ||
+        specialCharacterValid == false ||
+        numberValid == false) {
+      return 'This feild is required, must contain : ';
+    }
+    return null;
   }
 }

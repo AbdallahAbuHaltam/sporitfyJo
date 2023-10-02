@@ -25,7 +25,7 @@ static Future<void> saveOwnerData({required String ownerUID})async{
     String email = ownerModel.ownerEmail;
     String password = ownerModel.ownerEmail;
     String name = ownerModel.ownerName;
-    int phoneNumber = ownerModel.ownerPhone;
+    String phoneNumber = ownerModel.ownerPhone;
      try {
       await AuthServices.createUserWithEmailAndPassword(
           email: email, password: password);

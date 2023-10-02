@@ -5,8 +5,8 @@ class PlayerInfo {
   final String playerUUId;
   final String playerName;
   final String playerGender;
-  final int playerPhone;
-  final int playerAge;
+  final String playerPhone;
+  final String playerAge;
   PlayerInfo({
     required this.playerEmail,
     required this.playerPassword,

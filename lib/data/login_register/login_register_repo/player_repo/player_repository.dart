@@ -24,8 +24,8 @@ class LoginPlayerRegisterationRepository{
     String password = playerModel.playerPassword;
     String name = playerModel.playerName;
     String gender=playerModel.playerGender;
-    int age = playerModel.playerAge;
-    int phoneNumber = playerModel.playerPhone;
+    String age = playerModel.playerAge;
+    String phoneNumber = playerModel.playerPhone;
      try {
       await AuthServices.createUserWithEmailAndPassword(
           email: email, password: password);

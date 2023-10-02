@@ -10,7 +10,7 @@ class OwnerSignUpEvent extends LoginRegisterBlocEvent{
   final String password;
   final OwnerInfo ownerInfo;
 
-  OwnerSignUpEvent(this.email, this.password, this.ownerInfo);
+  OwnerSignUpEvent({required this.email, required this.password,required this.ownerInfo});
 
 }
 
@@ -33,7 +33,8 @@ class LoginSuccessEvent extends LoginRegisterBlocEvent{
   final String email;
   final String password;
 
-  LoginSuccessEvent(this.email, this.password);
+  LoginSuccessEvent({ required this.email,required this.password});
+
 
 }
 

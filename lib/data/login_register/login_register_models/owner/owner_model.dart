@@ -3,7 +3,7 @@ class OwnerInfo {
   final String ownerPassword;
   final String ownerName;
   final String ownerUUId;
-  final int ownerPhone;
+  final String ownerPhone;
   OwnerInfo({
     required this.ownerEmail,
     required this.ownerPassword,
