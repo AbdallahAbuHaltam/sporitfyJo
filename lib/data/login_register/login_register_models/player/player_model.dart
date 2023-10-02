@@ -4,13 +4,17 @@ class PlayerInfo {
   final String playerPassword;
   final String playerUUId;
   final String playerName;
+  final String playerGender;
   final int playerPhone;
+  final int playerAge;
   PlayerInfo({
     required this.playerEmail,
     required this.playerPassword,
     required this.playerUUId,
     required this.playerName,
+    required this.playerGender,
     required this.playerPhone,
+    required this.playerAge,
   });
 
 
@@ -20,7 +24,9 @@ class PlayerInfo {
       'playerPassword': playerPassword,
       'playerUUId': playerUUId,
       'playerName': playerName,
+      'playerGender':playerGender,
       'playerPhone': playerPhone,
+      'playerAge':playerAge,
     };
   }
 
@@ -30,7 +36,9 @@ class PlayerInfo {
       playerPassword: json['playerPassword'],
       playerUUId: json['playerUUId'],
       playerName: json['playerName'],
+      playerGender:json['playerGender'],
       playerPhone: json['playerPhone'],
+      playerAge:json['playerAge'],
     );
   }
 }
