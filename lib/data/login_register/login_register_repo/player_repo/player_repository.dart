@@ -54,4 +54,8 @@ class LoginPlayerRegisterationRepository{
     }
   }
 
+  static void removeData( String key) {
+    SharedPreferencesManager.removeData(key:key);
+  }
+
 }
