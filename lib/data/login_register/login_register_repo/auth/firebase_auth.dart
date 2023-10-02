@@ -26,10 +26,7 @@ class AuthServices {
     return await _auth.signOut();
   }
 
-  static Future<String> userUidFromFirebase() async {
-    String userUID = _auth.currentUser!.uid;
-    return userUID;
-  }
+
 
   static Future<String> fetchUserUIDFromFirebase(
       {required String email, required String password}) async {
