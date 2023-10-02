@@ -21,7 +21,7 @@ static Future<void> saveOwnerData({required String ownerUID})async{
     return playerUid;
   }
 
-  static Future<bool> isPlayerDataUploadedToFirestore({required OwnerInfo ownerModel})async{
+  static Future<bool> isOwnerDataUploadedToFirestore({required OwnerInfo ownerModel})async{
     String email = ownerModel.ownerEmail;
     String password = ownerModel.ownerEmail;
     String name = ownerModel.ownerName;

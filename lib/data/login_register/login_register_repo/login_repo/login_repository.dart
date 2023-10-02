@@ -5,7 +5,7 @@ import 'package:sportify/data/login_register/login_register_repo/auth/firebase_a
 import '../../../../shared_preference/shared_preference.dart';
 
 class LoginRepository{
-  static Future<bool> loginSuccessful({required String email, required String password})async{
+  static Future<bool> isLoginSuccessful({required String email, required String password})async{
     try{
       String userUID =
           await AuthServices.fetchUserUIDFromFirebase(email: email, password: password);
