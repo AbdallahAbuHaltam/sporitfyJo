@@ -60,7 +60,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                     padding: EdgeInsets.all(pageWidth * 0.05),
                     child: TextFormField(
                       controller: _emailController,
-                      validator: SignUpFunction.emailValidator,
+                      validator: SharedFunction.emailValidator,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -95,10 +95,10 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                       onChanged: (value) {
                         setState(() {
                           _isPasswordValid =
-                              SignUpFunction.isPasswordValid(value);
+                              SharedFunction.isPasswordValid(value);
                         });
                       },
-                      validator: SignUpFunction.passwordValidator,
+                      validator: SharedFunction.passwordValidator,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),

@@ -1,8 +1,9 @@
 import 'dart:core';
 
+import 'package:flutter/material.dart';
 import 'package:sportify/screens/authentication/owner_signup/owner_signup.dart';
 
-class SignUpFunction {
+class SharedFunction {
   static String? emailValidator(var value) {
     if (value.isEmpty) {
       return 'Email required';
@@ -36,5 +37,28 @@ class SignUpFunction {
     bool numberValid = digitRegex.hasMatch(password);
 
     return capitalLetterValid && specialCharacterValid && numberValid;
+  }
+
+  static void navigatorPushFunction(BuildContext context, pageName) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => pageName,
+        ));
+  }
+
+  static void navigatorPopFunction(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  static void navigatorPushAndRemoveUntilFunction(
+      BuildContext context, pageName) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => pageName,
+      ),
+      (route) => false,
+    );
   }
 }

@@ -16,10 +16,29 @@ TextStyle inFont = GoogleFonts.poppins(
   decoration: TextDecoration.none,
 );
 
+TextStyle drawerListTile = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: white,
+  decoration: TextDecoration.none,
+);
+
 TextStyle loginText = GoogleFonts.poppins(
   fontSize: 9,
   color: mMainColor,
   decoration: TextDecoration.none,
+);
+TextStyle addEditText = GoogleFonts.poppins(
+  fontSize: 16,
+  color: white,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle chooseImageText = GoogleFonts.poppins(
+  fontSize: 10,
+  color: white,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
 );
 
 TextStyle loginFontButton = GoogleFonts.staatliches(
