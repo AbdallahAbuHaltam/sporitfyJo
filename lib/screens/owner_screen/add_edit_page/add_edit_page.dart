@@ -1,25 +1,38 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportify/data/add_edit/add_edit_bloc/add_edit_bloc.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/owner_home/owner_home_bloc/owner_home_bloc.dart';
+import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 import 'package:sportify/utilities/fonts/fonts.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddEditPage extends StatefulWidget {
-  bool isEdit;
-  AddEditPage({super.key, required this.isEdit});
+  final bool isEdit;
+  const AddEditPage({super.key, required this.isEdit});
 
   @override
   State<AddEditPage> createState() => _AddEditPageState();
 }
 
 class _AddEditPageState extends State<AddEditPage> {
-  TextEditingController _playgroundNameController = TextEditingController();
-  TextEditingController _playgroundPriceController = TextEditingController();
-  TextEditingController _playgroundSizeController = TextEditingController();
+  final TextEditingController _playgroundNameController =
+      TextEditingController();
+  final TextEditingController _playgroundPriceController =
+      TextEditingController();
+  final TextEditingController _playgroundSizeController =
+      TextEditingController();
+  List<String> playgroundType = [
+    "football",
+    "basketball",
+    "tennis",
+    "volleyball",
+    "padel"
+  ];
+  String? selectTypeOfPlayground;
+  bool typeSelect = false;
+  int selectedIndexType = -1;
 
   List<String> playgroundSize = ['5x5', '6x6'];
   String selectSize = '5x5';
@@ -33,6 +46,9 @@ class _AddEditPageState extends State<AddEditPage> {
         listener: (context, state) {
           if (state is PickedImageState) {
             image = state.image;
+          }
+          if (state is LoadAllPlaygroundEvent) {
+            SharedFunction.navigatorPopFunction(context);
           }
         },
         builder: (context, state) {
@@ -116,6 +132,117 @@ class _AddEditPageState extends State<AddEditPage> {
                           },
                         ),
                       ),
+                      Text(
+                        'Type of playground :',
+                        style: typeOfPlaygroundText,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(pageHeight * 0.013),
+                        child: SizedBox(
+                          height: pageHeight * 0.11,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: playgroundType.length,
+                            itemBuilder: (context, indexOfType) {
+                              return GestureDetector(
+                                onTap: () {
+                                  typeSelect = true;
+                                  setState(() {
+                                    selectTypeOfPlayground =
+                                        playgroundType[indexOfType];
+                                    selectedIndexType = indexOfType;
+                                  });
+                                },
+                                child: selectedIndexType == indexOfType
+                                    ? Padding(
+                                        padding: EdgeInsets.only(
+                                            left: pageWidth * 0.02,
+                                            right: pageWidth * 0.02),
+                                        child: Stack(
+                                          children: [
+                                            Column(
+                                              children: [
+                                                ClipOval(
+                                                  child: Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    width: 70,
+                                                    height: 70,
+                                                    margin: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 4),
+                                                    child: Center(
+                                                      child: Image.asset(
+                                                        'assets/images/${playgroundType[indexOfType]}.jpg',
+                                                        fit: BoxFit.cover,
+                                                        width: 100,
+                                                        height: 70,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  playgroundType[indexOfType],
+                                                  style: typeOfPlaygroundText,
+                                                )
+                                              ],
+                                            ),
+                                            Positioned(
+                                                left: pageWidth * 0.14,
+                                                bottom: pageHeight * 0.075,
+                                                child: const SizedBox(
+                                                  width: 20,
+                                                  child: CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.green,
+                                                    child: Icon(Icons.check,
+                                                        size: 20,
+                                                        color: Colors.white),
+                                                  ),
+                                                )),
+                                          ],
+                                        ),
+                                      )
+                                    : Padding(
+                                        padding: EdgeInsets.only(
+                                            left: pageWidth * 0.02,
+                                            right: pageWidth * 0.02),
+                                        child: Column(
+                                          children: [
+                                            ClipOval(
+                                              child: Container(
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                width: 70,
+                                                height: 70,
+                                                margin:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 4),
+                                                child: Center(
+                                                  child: Image.asset(
+                                                    'assets/images/${playgroundType[indexOfType]}.jpg',
+                                                    fit: BoxFit.cover,
+                                                    width: 100,
+                                                    height: 70,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Text(
+                                              playgroundType[indexOfType],
+                                              style: typeOfPlaygroundText,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: EdgeInsets.only(
                             top: pageHeight * 0.001, bottom: pageHeight * 0.02),
@@ -155,18 +282,29 @@ class _AddEditPageState extends State<AddEditPage> {
                                     width: pageWidth * 0.4,
                                     height: pageHeight * 0.15,
                                     decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                        color: mSecondaryColor),
+                                        border: Border.all(
+                                            color: mMainColor, width: 3)),
                                     child: image == null
-                                        ? Text('Not Choosing image !')
-                                        : Align(
-                                            alignment: Alignment.topCenter,
-                                            child: SizedBox(
-                                              width: 100,
-                                              height: 80,
-                                              child: Image.file(
-                                                image!,
-                                                fit: BoxFit.contain,
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                              top: pageHeight * 0.04,
+                                            ),
+                                            child: const Text(
+                                                'Not Choosing \nimage !',
+                                                textAlign: TextAlign.center),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                                top: pageHeight * 0.007),
+                                            child: Align(
+                                              alignment: Alignment.topCenter,
+                                              child: SizedBox(
+                                                width: 100,
+                                                height: 80,
+                                                child: Image.file(
+                                                  image!,
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -205,8 +343,13 @@ class _AddEditPageState extends State<AddEditPage> {
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         _handelAddOrEditModel;
+                        PlaygroundInfo newPlaygroundModel =
+                            _handelAddOrEditModel();
+                        BlocProvider.of<AddEditBloc>(context).add(
+                            AddPlaygroundEvent(
+                                playgroundModel: newPlaygroundModel));
                       },
                       child: Container(
                         width: pageWidth * 0.5,
@@ -237,6 +380,7 @@ class _AddEditPageState extends State<AddEditPage> {
   PlaygroundInfo _handelAddOrEditModel() {
     PlaygroundInfo playgroundModel = PlaygroundInfo(
         playgroundName: _playgroundNameController.text,
+        playgroundType: selectTypeOfPlayground!,
         playgroundPrice: _playgroundPriceController.text,
         playgroundSize: _playgroundSizeController.text,
         playgroundImage: image.toString(),

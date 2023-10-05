@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sportify/screens/shared_functions/signup_functions.dart';
-
 import '../../utilities/colors/utilities.dart';
 
 Widget textFormFied(

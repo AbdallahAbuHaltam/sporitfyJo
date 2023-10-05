@@ -40,6 +40,12 @@ TextStyle chooseImageText = GoogleFonts.poppins(
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );
+TextStyle typeOfPlaygroundText = GoogleFonts.poppins(
+  fontSize: 14,
+  color: black,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
 
 TextStyle loginFontButton = GoogleFonts.staatliches(
   fontSize: 12,

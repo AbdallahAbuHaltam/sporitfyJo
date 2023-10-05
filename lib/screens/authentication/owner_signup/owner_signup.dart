@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/screens/shared_widget/widgets.dart';
@@ -270,6 +272,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                       ),
                       languageCode: "en",
                       onCountryChanged: (country) {
+                        // ignore: avoid_print
                         print('Country changed to: ${country.name}');
                       },
                     ),

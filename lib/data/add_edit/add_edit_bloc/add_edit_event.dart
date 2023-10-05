@@ -8,5 +8,5 @@ class ChoosingImageEvent extends AddEditEvent {}
 class AddPlaygroundEvent extends AddEditEvent {
   final PlaygroundInfo playgroundModel;
 
-  AddPlaygroundEvent(this.playgroundModel);
+  AddPlaygroundEvent({required this.playgroundModel});
 }

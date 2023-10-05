@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sportify/screens/owner_screen/owner_home/owner_home_page.dart';
-import 'package:sportify/screens/type_of_user/type_of_user_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
   runApp(const MyApp());
