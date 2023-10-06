@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sportify/screens/owner_screen/add_edit_page/add_edit_page.dart';
 import 'package:sportify/screens/owner_screen/owner_home/owner_home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -17,8 +18,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: OwnerHomePage(),
-    );
+        debugShowCheckedModeBanner: false, home: OwnerHomePage());
   }
 }

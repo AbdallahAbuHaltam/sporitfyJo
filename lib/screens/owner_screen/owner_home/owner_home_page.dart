@@ -18,35 +18,11 @@ class OwnerHomePage extends StatefulWidget {
 }
 
 class _OwnerHomePageState extends State<OwnerHomePage> {
-  List<PlaygroundInfo> playgroundList = [
-    PlaygroundInfo(
-        playgroundName: 'FCB',
-        playgroundType: 'football',
-        playgroundPrice: '35',
-        playgroundSize: '5*5',
-        playgroundImage: 'assets/images/football.jpg',
-        playgroundAvailability: true),
-    PlaygroundInfo(
-        playgroundName: 'FCB',
-        playgroundType: 'football',
-        playgroundPrice: '35',
-        playgroundSize: '5*5',
-        playgroundImage: 'assets/images/football.jpg',
-        playgroundAvailability: true),
-    PlaygroundInfo(
-        playgroundName: 'FCB',
-        playgroundType: 'football',
-        playgroundPrice: '35',
-        playgroundSize: '5*5',
-        playgroundImage: 'assets/images/football.jpg',
-        playgroundAvailability: true)
-  ];
   @override
   Widget build(BuildContext context) {
     double pageWidth = MediaQuery.of(context).size.width;
     double pageHeight = MediaQuery.of(context).size.height;
-    double cardWidth = MediaQuery.of(context).size.width * 0.97;
-    double cardHeight = MediaQuery.of(context).size.height * 0.26;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
