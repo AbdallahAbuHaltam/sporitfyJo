@@ -46,11 +46,12 @@ class AddEditRepository {
         'playgroundAvailability': playgroundAvailability
       };
 
-      await playgroundCollection.doc(ownerUID).set(playgroundMap);
+      // await playgroundCollection.doc(ownerUID).set(playgroundMap);
+      await playgroundCollection.add(playgroundMap);
 
       return true;
     } catch (e) {
-      print(e);
+      print('error is ____________________> $e');
       return false;
     }
   }
