@@ -9,6 +9,12 @@ TextStyle appBarFont = GoogleFonts.teko(
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
+TextStyle sizeOfPlaygroundFont = GoogleFonts.teko(
+  fontSize: 28,
+  color: mBackgroundColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
 
 TextStyle inFont = GoogleFonts.poppins(
   fontSize: 20,
