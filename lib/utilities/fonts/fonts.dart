@@ -27,3 +27,34 @@ TextStyle loginFontButton = GoogleFonts.staatliches(
   color: mPrimaryColor,
   decoration: TextDecoration.none,
 );
+
+TextStyle sizeOfPlaygroundFont = GoogleFonts.teko(
+  fontSize: 28,
+  color: mBackgroundColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+TextStyle drawerListTile = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: white,
+  decoration: TextDecoration.none,
+);
+TextStyle addEditText = GoogleFonts.poppins(
+  fontSize: 16,
+  color: white,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle chooseImageText = GoogleFonts.poppins(
+  fontSize: 10,
+  color: white,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle typeOfPlaygroundText = GoogleFonts.poppins(
+  fontSize: 14,
+  color: black,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);

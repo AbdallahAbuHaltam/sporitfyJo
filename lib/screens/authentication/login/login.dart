@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sportify/screens/owner_screen/owner_home.dart';
+import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
 import 'package:sportify/screens/player_screen/player_home.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 
@@ -217,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
         context,
         MaterialPageRoute(builder: (context) {
           if (widget.isOwner == true) {
-            return  OwnerHome(
+            return  OwnerHomePage(
               isOwner: true,
             );
           } else {

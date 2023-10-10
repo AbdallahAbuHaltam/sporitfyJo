@@ -1,8 +1,9 @@
 import 'dart:core';
 
+import 'package:flutter/material.dart';
 import 'package:sportify/screens/authentication/owner_signup/owner_signup.dart';
 
-class SignUpFunction {
+class SharedFunction {
   static String? emailValidator(var value) {
     if (value.isEmpty) {
       return 'Email required';
@@ -26,25 +27,38 @@ class SignUpFunction {
     return null;
   }
 
-   static bool isPasswordValid(String password) {
+  static bool isPasswordValid(String password) {
     RegExp uppercaseRegex = RegExp(r'[A-Z]');
     RegExp specialCharRegex = RegExp(r'[!@#$%^&*]');
     RegExp digitRegex = RegExp(r'\d');
 
-    capitalLetterValid = uppercaseRegex.hasMatch(password);
-    specialCharacterValid = specialCharRegex.hasMatch(password);
-    numberValid = digitRegex.hasMatch(password);
+    bool capitalLetterValid = uppercaseRegex.hasMatch(password);
+    bool specialCharacterValid = specialCharRegex.hasMatch(password);
+    bool numberValid = digitRegex.hasMatch(password);
 
     return capitalLetterValid && specialCharacterValid && numberValid;
   }
 
-  static String? validatePassword(value) {
-    if (value!.isEmpty ||
-        capitalLetterValid == false ||
-        specialCharacterValid == false ||
-        numberValid == false) {
-      return 'This feild is required, must contain : ';
-    }
-    return null;
+  static void navigatorPushFunction(BuildContext context, pageName) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => pageName,
+        ));
+  }
+
+  static void navigatorPopFunction(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  static void navigatorPushAndRemoveUntilFunction(
+      BuildContext context, pageName) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => pageName,
+      ),
+      (route) => false,
+    );
   }
 }

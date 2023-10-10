@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:sportify/screens/player_screen/player_home.dart';
-import 'package:sportify/screens/owner_screen/owner_home.dart';
+import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
 import 'package:sportify/screens/type_of_user/type_of_user_screen.dart';
 import 'package:sportify/shared_preference/shared_preference.dart';
 
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                 String? currentType = typeSnapshot.data;
 
                 if (currentType == 'owner') {
-                  return  OwnerHome(
+                  return  OwnerHomePage(
                     isOwner: true,
                   );
                 } else if (currentType == 'customer') {
