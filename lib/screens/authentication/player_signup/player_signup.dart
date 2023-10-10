@@ -136,7 +136,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                                     SharedFunction.isPasswordValid(value);
                               });
                             },
-                            validator: SharedFunction.passwordValidator,
+                            validator: SharedFunction.validatePassword,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),

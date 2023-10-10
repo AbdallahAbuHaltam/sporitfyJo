@@ -16,8 +16,10 @@ class SharedFunction {
     return null;
   }
 
-  static String? passwordValidator(value) {
-    if (value.isEmpty ||
+  
+
+  static String? validatePassword(value) {
+    if (value!.isEmpty ||
         capitalLetterValid == false ||
         specialCharacterValid == false ||
         numberValid == false) {
@@ -32,9 +34,9 @@ class SharedFunction {
     RegExp specialCharRegex = RegExp(r'[!@#$%^&*]');
     RegExp digitRegex = RegExp(r'\d');
 
-    bool capitalLetterValid = uppercaseRegex.hasMatch(password);
-    bool specialCharacterValid = specialCharRegex.hasMatch(password);
-    bool numberValid = digitRegex.hasMatch(password);
+    capitalLetterValid = uppercaseRegex.hasMatch(password);
+    specialCharacterValid = specialCharRegex.hasMatch(password);
+    numberValid = digitRegex.hasMatch(password);
 
     return capitalLetterValid && specialCharacterValid && numberValid;
   }

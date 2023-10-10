@@ -118,7 +118,7 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                                     SharedFunction.isPasswordValid(value);
                               });
                             },
-                            validator: SharedFunction.passwordValidator,
+                            validator: SharedFunction.validatePassword,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
