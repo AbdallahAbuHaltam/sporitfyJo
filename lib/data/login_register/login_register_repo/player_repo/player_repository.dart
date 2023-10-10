@@ -46,7 +46,7 @@ class LoginPlayerRegisterationRepository{
       };
       await LoginPlayerRegisterationRepository.savePlayerData(
           playerUID: userUID);
-      player.doc(userUID).set(playerDataForFirestore);
+      await player.doc(userUID).set(playerDataForFirestore);
       return true;
     } catch (e) {
       print(e.toString());

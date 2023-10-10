@@ -23,7 +23,7 @@ static Future<void> saveOwnerData({required String ownerUID})async{
 
   static Future<bool> isOwnerDataUploadedToFirestore({required OwnerInfo ownerModel})async{
     String email = ownerModel.ownerEmail;
-    String password = ownerModel.ownerEmail;
+    String password = ownerModel.ownerPassword;
     String name = ownerModel.ownerName;
     String phoneNumber = ownerModel.ownerPhone;
      try {
@@ -44,7 +44,7 @@ static Future<void> saveOwnerData({required String ownerUID})async{
       };
       await LoginOwnerRegisterationRepository.saveOwnerData(
           ownerUID: userUID);
-      owner.doc(userUID).set(ownerDataForFirestore);
+       await owner.doc(userUID).set(ownerDataForFirestore);
       return true;
     } catch (e) {
       print(e.toString());

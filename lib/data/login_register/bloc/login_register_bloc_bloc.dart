@@ -30,7 +30,7 @@ class LoginRegisterBlocBloc
             ownerModel: event.ownerInfo);
 
     if (isUploaded) {
-      emit(LoginRegisterLoading());
+      emit(LoginRegisterLoaded());
     } else {
       emit(LoginRegisterFailure());
     }
@@ -44,7 +44,7 @@ class LoginRegisterBlocBloc
         .isPlayerDataUploadedToFirestore(playerModel: event.playerInfo);
 
     if (isUploaded) {
-      emit(LoginRegisterLoading());
+      emit(LoginRegisterLoaded());
     } else {
       emit(LoginRegisterFailure());
     }
