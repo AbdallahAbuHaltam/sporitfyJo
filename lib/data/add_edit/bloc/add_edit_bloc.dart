@@ -20,7 +20,7 @@ class AddEditBloc extends Bloc<AddEditEvent, AddEditState> {
 Future<void> _handelPickImage(
     ChoosingImageEvent event, Emitter<AddEditState> emit) async {
   try {
-    File? image = await AddEditRepository.uploadImage();
+    String? image = await AddEditRepository.uploadImage();
     emit(PickedImageState(image: image!));
   } catch (e) {
     print(e);
@@ -31,7 +31,7 @@ Future<void> _handelAddPlayground(
     AddPlaygroundEvent event, Emitter<AddEditState> emit) async {
   emit(LoadingState());
 
-  bool isUploaded = await AddEditRepository.addPlaygroundToFireStore(
+  bool isUploaded = await AddEditRepository.addPlaygroundToFirestore(
       playgroundModel: event.playgroundModel);
 
   if (isUploaded) {

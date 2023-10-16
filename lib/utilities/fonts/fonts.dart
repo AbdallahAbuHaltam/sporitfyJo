@@ -117,3 +117,20 @@ TextStyle homePriceFont = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
+
+TextStyle nameOfProfilePage = GoogleFonts.teko(
+  fontSize: 22,
+  color: white,
+  decoration: TextDecoration.none,
+);
+
+TextStyle profilePagefont = GoogleFonts.teko(
+  fontSize: 22,
+  color: canNotChang,
+  decoration: TextDecoration.none,
+);
+TextStyle nameOfCarFont = GoogleFonts.teko(
+  fontSize: 22,
+  color: white,
+  decoration: TextDecoration.none,
+);

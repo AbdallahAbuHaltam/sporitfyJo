@@ -28,12 +28,9 @@ class _AddEditPageState extends State<AddEditPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _playgroundNameController =
-      TextEditingController();
-  final TextEditingController _playgroundPriceController =
-      TextEditingController();
-  final TextEditingController _playgroundSizeController =
-      TextEditingController();
+  TextEditingController _playgroundNameController = TextEditingController();
+  TextEditingController _playgroundPriceController = TextEditingController();
+  TextEditingController _playgroundSizeController = TextEditingController();
   List<String> playgroundType = [
     "football",
     "basketball",
@@ -47,6 +44,22 @@ class _AddEditPageState extends State<AddEditPage> {
   bool chooseFootball = false;
   bool selected5x5 = false;
   bool selected6x6 = false;
+  String? image;
+
+  void initState() {
+    if (widget.isEdit) {
+      _playgroundNameController =
+          TextEditingController(text: widget.playground!.playgroundName);
+      _playgroundPriceController =
+          TextEditingController(text: widget.playground!.playgroundPrice);
+      selectTypeOfPlayground = widget.playground!.playgroundType;
+      selectSize = widget.playground!.playgroundSize;
+      image = widget.playground!.playgroundImage;
+      playgroundUID = widget.playground!.playgroundUID;
+    }
+
+    super.initState();
+  }
 
   // List<String> playgroundSize = ['5x5', '6x6'];
   String? selectSize;
@@ -384,9 +397,9 @@ class _AddEditPageState extends State<AddEditPage> {
                                           child: Align(
                                             alignment: Alignment.topCenter,
                                             child: SizedBox(
-                                              width: 100,
-                                              height: 80,
-                                              child: Image.file(
+                                              width: 150,
+                                              height: 120,
+                                              child: Image.network(
                                                 image!,
                                                 fit: BoxFit.contain,
                                               ),
@@ -456,7 +469,7 @@ class _AddEditPageState extends State<AddEditPage> {
     );
   }
 
-  File? image;
+  String? playgroundUID;
   PlaygroundInfo _handelAddOrEditModel() {
     String playgroundUID = generateUID();
 
@@ -465,7 +478,7 @@ class _AddEditPageState extends State<AddEditPage> {
         playgroundType: selectTypeOfPlayground!,
         playgroundPrice: _playgroundPriceController.text,
         playgroundSize: selectSize!,
-        playgroundImage: image.toString(),
+        playgroundImage: image!,
         playgroundAvailability: true,
         playgroundUID: playgroundUID);
     return playgroundModel;

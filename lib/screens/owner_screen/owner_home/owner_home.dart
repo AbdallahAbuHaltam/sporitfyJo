@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/login_register/login_register_models/owner/owner_model.dart';
+import 'package:sportify/data/profile/profile_bloc/profile_bloc.dart';
 import 'package:sportify/screens/detail_page/detail_page.dart';
 import 'package:sportify/screens/owner_screen/add_edit_page/add_edit_page.dart';
 import 'package:sportify/screens/type_of_user/type_of_user_screen.dart';
@@ -23,6 +25,7 @@ class OwnerHomePage extends StatefulWidget {
 
 class _OwnerHomePageState extends State<OwnerHomePage> {
   List<PlaygroundInfo> playgroundList = [];
+  OwnerInfo? ownerInfo;
   @override
   Widget build(BuildContext context) {
     double pageWidth = MediaQuery.of(context).size.width;
@@ -33,6 +36,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
         BlocProvider<OwnerHomeBloc>(
           create: (context) => OwnerHomeBloc()..add(LoadAllPlaygroundEvent()),
         ),
+        BlocProvider<ProfileBloc>(create: (context) => ProfileBloc())
       ],
       child: MultiBlocListener(
         listeners: [
@@ -43,6 +47,22 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
               // }
               if (state is LoadedAllPlaygroundState) {
                 playgroundList = state.playgroungList;
+              }
+            },
+          ),
+          BlocListener<ProfileBloc, ProfileState>(
+            listener: (context, state) {
+              if (state is LoadingProfileDataState) {
+                const CircularProgressIndicator();
+              }
+              if (state is LoadedOwnerProfileDataState) {
+                ownerInfo = state.ownerInfo;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ProfilePage(isOwner: true, ownerInfo: ownerInfo),
+                    ));
               }
             },
           ),
@@ -73,17 +93,18 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                           style: appBarFont,
                         )),
                     ListTile(
-                      leading: const Icon(
-                        Icons.person,
-                        color: white,
-                      ),
-                      title: Text(
-                        'Profile',
-                        style: drawerListTile,
-                      ),
-                      onTap: () => SharedFunction.navigatorPushFunction(
-                          context, const ProfilePage()),
-                    ),
+                        leading: const Icon(
+                          Icons.person,
+                          color: white,
+                        ),
+                        title: Text(
+                          'Profile',
+                          style: drawerListTile,
+                        ),
+                        onTap: () {
+                          BlocProvider.of<ProfileBloc>(context)
+                              .add(LoadOwnerProfileEvent(isOwner: true));
+                        }),
                     SizedBox(
                       height: pageHeight * 0.01,
                     ),
@@ -225,15 +246,15 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                         },
                         child: Container(
                           width: pageWidth * 0.6,
-                          height: pageHeight * 0.24,
+                          height: pageHeight * 0.22,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
                               image: DecorationImage(
-                                  image: AssetImage(
-                                'assets/images/stadium.jpg',
+                                  image: NetworkImage(
+                                playgroundList[index].playgroundImage,
                               ))),
                           child: Padding(
-                            padding: EdgeInsets.only(right: 47),
+                            padding: EdgeInsets.only(right: pageWidth * 0.05),
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: Container(

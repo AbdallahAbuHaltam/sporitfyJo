@@ -33,7 +33,7 @@ class _DetailPageState extends State<DetailPage> {
             SizedBox(
               width: pageWidth,
               height: pageHeight * 0.4,
-              child: Image.asset('assets/images/stadium.jpg'),
+              child: Image.network(widget.playground.playgroundImage),
             ),
             Positioned(
                 top: pageHeight * 0.06,
