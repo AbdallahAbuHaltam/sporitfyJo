@@ -10,8 +10,8 @@ TextStyle appBarFont = GoogleFonts.teko(
   decoration: TextDecoration.none,
 );
 TextStyle appBarFont2 = GoogleFonts.teko(
-  fontSize: 28,
-  color: mBackgroundColor,
+  fontSize: 20,
+  color: white,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
@@ -32,6 +32,8 @@ TextStyle homeText = GoogleFonts.poppins(
   color: mMainColor,
   decoration: TextDecoration.none,
 );
+TextStyle cardText = GoogleFonts.poppins(
+    fontSize: 20, color: mMainColor, fontWeight: FontWeight.bold);
 TextStyle homeText2 = GoogleFonts.poppins(
   fontSize: 27,
   color: mMainColor,
@@ -79,4 +81,25 @@ TextStyle typeOfPlaygroundText = GoogleFonts.poppins(
   color: black,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
+);
+
+TextStyle homeSizeFont = GoogleFonts.poppins(
+  fontSize: 15,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+  // shadows: [
+  //   Shadow(
+  //     offset: Offset(
+  //         2.0, 2.0), // Change the offset values for your desired shadow effect
+  //     blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
+  //     color: Color.fromARGB(255, 39, 38, 38).withOpacity(0.5), // Shadow color
+  //   ),
+  // ],
+);
+TextStyle homePriceFont = GoogleFonts.poppins(
+  fontSize: 14,
+  color: Colors.grey,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
 );

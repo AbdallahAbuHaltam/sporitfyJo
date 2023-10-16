@@ -17,10 +17,14 @@ class PlayerHomeBloc extends Bloc<PlayerHomeEvent, PlayerHomeState> {
 
 Future<void> _handelFetchAllPlayground(
     LoadAllPlaygroundEvent event, Emitter<PlayerHomeState> emit) async {
-  emit(LoadingState());
+  try {
+    emit(LoadingState());
 
   List<PlaygroundInfo> playgroundList =
-      await PlayerRepository.fetchAllPlaygroundFromFirestore();
+      await PLayerHomeRepository.fetchAllPlaygroundFromFirestore();
 
   emit(LoadedAllPlaygroundState(playgroungList: playgroundList));
+  } catch (e) {
+    print(e.toString());
+  }
 }

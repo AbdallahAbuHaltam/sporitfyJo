@@ -8,14 +8,16 @@ class PlaygroundInfo {
   String playgroundImage;
 
   bool playgroundAvailability;
-  PlaygroundInfo({
-    required this.playgroundName,
-    required this.playgroundType,
-    required this.playgroundPrice,
-    required this.playgroundSize,
-    required this.playgroundImage,
-    required this.playgroundAvailability,
-  });
+  String playgroundUID;
+
+  PlaygroundInfo(
+      {required this.playgroundName,
+      required this.playgroundType,
+      required this.playgroundPrice,
+      required this.playgroundSize,
+      required this.playgroundImage,
+      required this.playgroundAvailability,
+      required this.playgroundUID});
 
   Map<String, dynamic> toJosn() {
     return {
@@ -25,6 +27,7 @@ class PlaygroundInfo {
       'playgroundSize': playgroundSize,
       'playgroundImage': playgroundImage,
       'playgroundAvailability': playgroundAvailability,
+      'playgroundUID': playgroundUID,
     };
   }
 
@@ -36,6 +39,7 @@ class PlaygroundInfo {
       playgroundSize: json['playgroundSize'],
       playgroundImage: json['playgroundImage'],
       playgroundAvailability: json['playgroundAvailability'],
+      playgroundUID: json['playgroundUID'],
     );
   }
 }

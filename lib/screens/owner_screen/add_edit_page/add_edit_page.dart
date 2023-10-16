@@ -5,7 +5,7 @@ import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 import 'package:sportify/utilities/fonts/fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../data/add_edit/bloc/add_edit_bloc.dart';
 import '../../../data/owner_home/bloc/owner_home_bloc.dart';
@@ -19,6 +19,10 @@ class AddEditPage extends StatefulWidget {
 }
 
 class _AddEditPageState extends State<AddEditPage> {
+   String generateUID() {
+    const uuid = Uuid();
+    return uuid.v4();
+  }
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _playgroundNameController =
@@ -434,13 +438,15 @@ class _AddEditPageState extends State<AddEditPage> {
 
   File? image;
   PlaygroundInfo _handelAddOrEditModel() {
+    String playgroundUID = generateUID();
     PlaygroundInfo playgroundModel = PlaygroundInfo(
         playgroundName: _playgroundNameController.text,
         playgroundType: selectTypeOfPlayground!,
         playgroundPrice: _playgroundPriceController.text,
         playgroundSize: selectSize!,
         playgroundImage: image.toString(),
-        playgroundAvailability: true);
+        playgroundAvailability: true,
+        playgroundUID: playgroundUID);
     return playgroundModel;
   }
 

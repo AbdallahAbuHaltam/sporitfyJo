@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
-import 'package:sportify/data/owner_home/owner_home_repository/owner_home_repository.dart';
+
+import '../owner_home_repository/owner_home_repository.dart';
 
 part 'owner_home_event.dart';
 part 'owner_home_state.dart';
@@ -17,7 +18,7 @@ Future<void> _handelFetchAllPlayground(
   emit(LoadingState());
 
   List<PlaygroundInfo> playgroundList =
-      await OwnerRepository.fetchAllPlaygroundFromFirestore();
+      await OwnerHomeRepository.fetchAllPlaygroundFromFirestore();
 
   emit(LoadedAllPlaygroundState(playgroungList: playgroundList));
 }
