@@ -17,7 +17,7 @@ Future<void> _handelFetchAllPlayground(
   emit(LoadingState());
 
   List<PlaygroundInfo> playgroundList =
-      await OwnerRepository.fetchAllPlaygroundFromFirestore();
+      await OwnerHomeRepository.fetchAllPlaygroundFromFirestore();
 
   emit(LoadedAllPlaygroundState(playgroungList: playgroundList));
 }

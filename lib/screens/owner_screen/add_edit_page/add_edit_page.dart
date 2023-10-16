@@ -2,23 +2,30 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 import 'package:sportify/utilities/fonts/fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../data/add_edit/bloc/add_edit_bloc.dart';
-import '../../../data/owner_home/bloc/owner_home_bloc.dart';
 
 class AddEditPage extends StatefulWidget {
   final bool isEdit;
-  const AddEditPage({super.key, required this.isEdit});
+  PlaygroundInfo? playground;
+  AddEditPage({super.key, required this.isEdit, this.playground});
 
   @override
   State<AddEditPage> createState() => _AddEditPageState();
 }
 
 class _AddEditPageState extends State<AddEditPage> {
+  String generateUID() {
+    const uuid = Uuid();
+    return uuid.v4();
+  }
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _playgroundNameController =
@@ -55,8 +62,25 @@ class _AddEditPageState extends State<AddEditPage> {
             image = state.image;
             print(image);
           }
-          if (state is LoadAllPlaygroundEvent) {
-            SharedFunction.navigatorPopFunction(context);
+          if (state is LoadingState) {
+            const Center(
+              child: CircularProgressIndicator(
+                color: mMainColor,
+              ),
+            );
+          }
+          if (state is AddedPlaygroundState) {
+            Fluttertoast.showToast(
+              msg: "The Playground is added successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: mMainColor,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+
+            SharedFunction.navigatorPushAndRemoveUntilFunction(
+                context, OwnerHomePage(isOwner: true));
           }
         },
         builder: (context, state) {
@@ -434,13 +458,16 @@ class _AddEditPageState extends State<AddEditPage> {
 
   File? image;
   PlaygroundInfo _handelAddOrEditModel() {
+    String playgroundUID = generateUID();
+
     PlaygroundInfo playgroundModel = PlaygroundInfo(
         playgroundName: _playgroundNameController.text,
         playgroundType: selectTypeOfPlayground!,
         playgroundPrice: _playgroundPriceController.text,
         playgroundSize: selectSize!,
         playgroundImage: image.toString(),
-        playgroundAvailability: true);
+        playgroundAvailability: true,
+        playgroundUID: playgroundUID);
     return playgroundModel;
   }
 

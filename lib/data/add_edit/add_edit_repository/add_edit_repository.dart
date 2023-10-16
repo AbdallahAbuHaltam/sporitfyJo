@@ -5,6 +5,9 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sportify/data/login_register/login_register_repo/owner_repo/owner_repository.dart';
+
+import '../../../shared_preference/shared_preference.dart';
 
 class AddEditRepository {
   static CollectionReference playgroundCollection =
@@ -26,16 +29,19 @@ class AddEditRepository {
   static Future<bool> addPlaygroundToFireStore(
       {required PlaygroundInfo playgroundModel}) async {
     try {
-      //TODO: Add userUID from shared pref here
-      String ownerUID = 'will be change';
-
       String playgroundName = playgroundModel.playgroundName;
       String playgroundType = playgroundModel.playgroundType;
+      String playgroundUID = playgroundModel.playgroundUID;
 
       String playgroundPrice = playgroundModel.playgroundPrice;
       String playgroundSize = playgroundModel.playgroundSize;
       String playgroundImage = playgroundModel.playgroundImage;
       bool playgroundAvailability = playgroundModel.playgroundAvailability;
+      await SharedPreferencesManager.saveData(
+          key: 'carUID', value: playgroundUID);
+
+      String ownerUID =
+          await SharedPreferencesManager.getData(key: 'currentUID');
 
       Map<String, dynamic> playgroundMap = {
         'playgroundName': playgroundName,
@@ -43,11 +49,13 @@ class AddEditRepository {
         'playgroundPrice': playgroundPrice,
         'playgroundSize': playgroundSize,
         'playgroundImage': playgroundImage,
-        'playgroundAvailability': playgroundAvailability
+        'playgroundAvailability': playgroundAvailability,
+        'ownerUID': ownerUID,
+        'playgroundUID': playgroundUID
       };
 
-      // await playgroundCollection.doc(ownerUID).set(playgroundMap);
-      await playgroundCollection.add(playgroundMap);
+      await playgroundCollection.doc(playgroundUID).set(playgroundMap);
+      // await playgroundCollection.add(playgroundMap);
 
       return true;
     } catch (e) {
