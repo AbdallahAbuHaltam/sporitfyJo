@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
 
-class OwnerRepository {
+class PlayerRepository {
   static Future<List<PlaygroundInfo>> fetchAllPlaygroundFromFirestore() async {
     final QuerySnapshot<Map<String, dynamic>> documentsSnapshot =
         await FirebaseFirestore.instance.collection('playground').get();

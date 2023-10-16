@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
                   return  OwnerHomePage(
                     isOwner: true,
                   );
-                } else if (currentType == 'customer') {
+                } else if (currentType == 'player') {
                   return  PlayerHome(
                     isOwner: false,
                   );

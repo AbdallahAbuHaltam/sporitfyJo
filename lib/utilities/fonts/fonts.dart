@@ -9,6 +9,12 @@ TextStyle appBarFont = GoogleFonts.teko(
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
+TextStyle appBarFont2 = GoogleFonts.teko(
+  fontSize: 28,
+  color: mBackgroundColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
 
 TextStyle inFont = GoogleFonts.poppins(
   fontSize: 20,
@@ -20,6 +26,22 @@ TextStyle loginText = GoogleFonts.poppins(
   fontSize: 9,
   color: mMainColor,
   decoration: TextDecoration.none,
+);
+TextStyle homeText = GoogleFonts.poppins(
+  fontSize: 20,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+);
+TextStyle homeText2 = GoogleFonts.poppins(
+  fontSize: 27,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+);
+TextStyle homeText3 = GoogleFonts.poppins(
+  fontSize: 15,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
 );
 
 TextStyle loginFontButton = GoogleFonts.staatliches(
