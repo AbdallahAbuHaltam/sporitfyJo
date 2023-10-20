@@ -203,9 +203,10 @@ class _AddEditPageState extends State<AddEditPage> {
                                         } else {
                                           chooseFootball = false;
                                         }
+                                        selectedIndexType = indexOfType;
+
                                         selectTypeOfPlayground =
                                             playgroundType[indexOfType];
-                                        selectedIndexType = indexOfType;
                                       });
                                     },
                                     child: selectedIndexType == indexOfType
@@ -377,8 +378,8 @@ class _AddEditPageState extends State<AddEditPage> {
                             child: Stack(
                               children: [
                                 Container(
-                                  width: pageWidth * 0.4,
-                                  height: pageHeight * 0.15,
+                                  width: pageWidth * 0.55,
+                                  height: pageHeight * 0.18,
                                   decoration: BoxDecoration(
                                       border: Border.all(
                                           color: mMainColor, width: 3)),
@@ -408,8 +409,8 @@ class _AddEditPageState extends State<AddEditPage> {
                                         ),
                                 ),
                                 Positioned(
-                                  top: pageHeight * 0.1,
-                                  left: pageWidth * 0.09,
+                                  top: pageHeight * 0.133,
+                                  left: pageWidth * 0.15,
                                   child: GestureDetector(
                                     onTap: () =>
                                         BlocProvider.of<AddEditBloc>(context)
@@ -423,7 +424,9 @@ class _AddEditPageState extends State<AddEditPage> {
                                           color: mMainColor),
                                       child: Center(
                                         child: Text(
-                                          'Choose Image',
+                                          widget.isEdit
+                                              ? 'Change Image'
+                                              : 'Choose Image',
                                           style: chooseImageText,
                                         ),
                                       ),
@@ -443,19 +446,22 @@ class _AddEditPageState extends State<AddEditPage> {
                                   AddPlaygroundEvent(
                                       playgroundModel: newPlaygroundModel));
                             },
-                            child: Container(
-                              width: pageWidth * 0.5,
-                              height: pageHeight * 0.05,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(11),
-                                  color: mMainColor),
-                              child: widget.isEdit
-                                  ? Center(
-                                      child: Text('Confirm all Edit',
-                                          style: addEditText))
-                                  : Center(
-                                      child: Text('Add Playground',
-                                          style: addEditText)),
+                            child: Padding(
+                              padding: EdgeInsets.only(top: pageHeight * 0.05),
+                              child: Container(
+                                width: pageWidth * 0.5,
+                                height: pageHeight * 0.05,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(11),
+                                    color: mMainColor),
+                                child: widget.isEdit
+                                    ? Center(
+                                        child: Text('Confirm all Edit',
+                                            style: addEditText))
+                                    : Center(
+                                        child: Text('Add Playground',
+                                            style: addEditText)),
+                              ),
                             ),
                           ),
                         ],

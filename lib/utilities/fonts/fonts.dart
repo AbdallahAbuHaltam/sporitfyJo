@@ -74,20 +74,20 @@ TextStyle homeSizeFont = GoogleFonts.poppins(
   ],
 );
 
-TextStyle homeNameFont = GoogleFonts.poppins(
-  fontSize: 21,
-  color: black,
+TextStyle homeNameFont = GoogleFonts.oswald(
+  fontSize: 20,
+  color: white,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
-  shadows: [
-    Shadow(
-      offset: Offset(
-          2.0, 2.0), // Change the offset values for your desired shadow effect
-      blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
-      color:
-          Color.fromARGB(255, 188, 188, 188).withOpacity(0.5), // Shadow color
-    ),
-  ],
+  // shadows: [
+  //   Shadow(
+  //     offset: Offset(
+  //         2.0, 2.0), // Change the offset values for your desired shadow effect
+  //     blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
+  //     color:
+  //         Color.fromARGB(255, 188, 188, 188).withOpacity(0.5), // Shadow color
+  //   ),
+  // ],
 );
 TextStyle homeTypeFont = GoogleFonts.poppins(
   fontSize: 12,
@@ -132,5 +132,12 @@ TextStyle profilePagefont = GoogleFonts.teko(
 TextStyle nameOfCarFont = GoogleFonts.teko(
   fontSize: 22,
   color: white,
+  decoration: TextDecoration.none,
+);
+
+TextStyle homeBottomSheetFont = GoogleFonts.teko(
+  fontSize: 20,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );

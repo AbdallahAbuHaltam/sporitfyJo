@@ -162,14 +162,15 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                 ),
               ),
               body: SizedBox(
-                width: pageHeight * 0.6,
+                width: pageHeight * 0.7,
                 height: pageHeight,
-                child: ListView.builder(
-                  itemCount: playgroundList.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: 7, bottom: 10),
-                      child: GestureDetector(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: pageWidth * 0.1, right: pageWidth * 0.1),
+                  child: ListView.builder(
+                    itemCount: playgroundList.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
                         onLongPress: () {
                           showModalBottomSheet(
                             backgroundColor: mMainColor,
@@ -208,7 +209,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                             },
                                             title: Center(
                                               child: Text("Edit",
-                                                  style: homeDetailButtonFont),
+                                                  style: homeBottomSheetFont),
                                             ),
                                           ),
                                         ),
@@ -227,7 +228,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                         },
                                         title: Center(
                                           child: Text("Delete",
-                                              style: homeDetailButtonFont),
+                                              style: homeBottomSheetFont),
                                         ),
                                       ),
                                     ],
@@ -244,82 +245,83 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                   playground: playgroundList[index],
                                   isOwner: true));
                         },
-                        child: Container(
-                          width: pageWidth * 0.6,
-                          height: pageHeight * 0.22,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                playgroundList[index].playgroundImage,
-                              ))),
-                          child: Padding(
-                            padding: EdgeInsets.only(right: pageWidth * 0.05),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: <Color>[
-                                      Color.fromARGB(255, 220, 220, 220)
-                                          .withAlpha(210),
-                                      Color.fromARGB(31, 197, 197, 197)
-                                          .withAlpha(210),
-                                      Color.fromARGB(179, 205, 205, 205)
-                                          .withAlpha(210),
-                                    ],
+                        child: Card(
+                          elevation: 0,
+                          margin: const EdgeInsets.only(
+                              left: 0, right: 0, top: 20, bottom: 20),
+                          child: Container(
+                            width: pageWidth * 0.6,
+                            height: pageHeight * 0.22,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: NetworkImage(playgroundList[index]
+                                        .playgroundImage))),
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: pageHeight * 0.012),
+                              child: Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6),
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: <Color>[
+                                        Color.fromARGB(179, 102, 102, 102)
+                                            .withAlpha(210),
+                                        Color.fromARGB(179, 102, 102, 102)
+                                            .withAlpha(210),
+                                        Color.fromARGB(179, 102, 102, 102)
+                                            .withAlpha(210),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                width: pageWidth * 0.6,
-                                height: pageHeight * 0.1,
-                                child: Stack(
-                                  children: [
-                                    Positioned(
-                                        left: pageWidth * 0.5,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: mMainColor),
-                                          width: 40,
-                                          height: 40,
-                                          child: Center(
-                                            child: Text(
-                                              playgroundList[index]
-                                                  .playgroundSize,
-                                              style: homeSizeFont,
+                                  width: pageWidth * 0.6,
+                                  height: pageHeight * 0.1,
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                          left: pageWidth * 0.5,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: mMainColor),
+                                            width: 40,
+                                            height: 40,
+                                            child: Center(
+                                              child: Text(
+                                                playgroundList[index]
+                                                    .playgroundSize,
+                                                style: homeSizeFont,
+                                              ),
                                             ),
-                                          ),
-                                        )),
-                                    Positioned(
-                                        top: 0,
+                                          )),
+                                      Positioned(
+                                          top: 0,
+                                          left: 10,
+                                          child: Text(
+                                            playgroundList[index]
+                                                .playgroundName,
+                                            style: homeNameFont,
+                                          )),
+                                      Positioned(
+                                        top: 30,
                                         left: 10,
                                         child: Text(
-                                          playgroundList[index].playgroundName,
-                                          style: homeNameFont,
-                                        )),
-                                    Positioned(
-                                      top: 30,
-                                      left: 10,
-                                      child: Text(
-                                        playgroundList[index].playgroundType,
-                                        style: homeTypeFont,
+                                          playgroundList[index].playgroundType,
+                                          style: homeTypeFont,
+                                        ),
                                       ),
-                                    ),
-                                    Positioned(
-                                      top: 50,
-                                      left: 10,
-                                      child: Text(
-                                        "${playgroundList[index].playgroundPrice} \$",
-                                        style: homePriceFont,
+                                      Positioned(
+                                        top: 50,
+                                        left: 10,
+                                        child: Text(
+                                          "${playgroundList[index].playgroundPrice} \$",
+                                          style: homePriceFont,
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          bottom: 0.4, right: 0.5),
-                                      child: Align(
+                                      Align(
                                         alignment: Alignment.bottomRight,
                                         child: Container(
                                           decoration: const BoxDecoration(
@@ -350,17 +352,17 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             );
