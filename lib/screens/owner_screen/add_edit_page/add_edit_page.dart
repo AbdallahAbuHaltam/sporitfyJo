@@ -8,7 +8,8 @@ import 'package:sportify/utilities/colors/utilities.dart';
 import 'package:sportify/utilities/fonts/fonts.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uuid/uuid.dart';
-
+import 'package:time_range/time_range.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 import '../../../data/add_edit/bloc/add_edit_bloc.dart';
 
 class AddEditPage extends StatefulWidget {
@@ -25,6 +26,17 @@ class _AddEditPageState extends State<AddEditPage> {
     const uuid = Uuid();
     return uuid.v4();
   }
+
+  String dateOfBooking = "";
+  String fromTime = "";
+  String toTime = "";
+
+  final _defaultTimeRange = TimeRangeResult(
+    const TimeOfDay(hour: 14, minute: 00),
+    const TimeOfDay(hour: 15, minute: 00),
+  );
+  TimeRangeResult? _timeRange;
+  bool selectDate = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -47,6 +59,8 @@ class _AddEditPageState extends State<AddEditPage> {
   String? image;
 
   void initState() {
+    _timeRange = _defaultTimeRange;
+
     if (widget.isEdit) {
       _playgroundNameController =
           TextEditingController(text: widget.playground!.playgroundName);
@@ -85,6 +99,19 @@ class _AddEditPageState extends State<AddEditPage> {
           if (state is AddedPlaygroundState) {
             Fluttertoast.showToast(
               msg: "The Playground is added successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              timeInSecForIosWeb: 1,
+              backgroundColor: mMainColor,
+              textColor: Colors.white,
+              fontSize: 16.0,
+            );
+
+            SharedFunction.navigatorPushAndRemoveUntilFunction(
+                context, OwnerHomePage(isOwner: true));
+          }
+          if (state is EditPlaygroundSuccessfully) {
+            Fluttertoast.showToast(
+              msg: "The Playground is Edited successfully",
               toastLength: Toast.LENGTH_SHORT,
               timeInSecForIosWeb: 1,
               backgroundColor: mMainColor,
@@ -436,15 +463,132 @@ class _AddEditPageState extends State<AddEditPage> {
                               ],
                             ),
                           ),
+                          Padding(
+                            padding: EdgeInsets.only(top: pageHeight * 0.02),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                DatePicker(
+                                  DateTime.now(),
+                                  initialSelectedDate: DateTime.now(),
+                                  selectionColor: mMainColor,
+                                  selectedTextColor: mPrimaryColor,
+                                  onDateChange: (date) {
+                                    // New date selected
+                                    setState(() {
+                                      // selectedValue = date;
+
+                                      List<String> splitDate =
+                                          date.toString().split(' ');
+                                      dateOfBooking = splitDate[0];
+                                      print(dateOfBooking);
+                                      selectDate = true;
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: selectDate,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                      top: pageHeight * 0.03,
+                                      left: pageWidth * 0.05),
+                                  child: Text(
+                                    'Opening Times',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headline6!
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: dark),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
+                                TimeRange(
+                                  fromTitle: const Text(
+                                    'FROM',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: dark,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  toTitle: const Text(
+                                    'TO',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: dark,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  titlePadding: 50,
+                                  textStyle: const TextStyle(
+                                    fontWeight: FontWeight.normal,
+                                    color: dark,
+                                  ),
+                                  activeTextStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: mPrimaryColor,
+                                  ),
+                                  borderColor: dark,
+                                  activeBorderColor: dark,
+                                  backgroundColor: Colors.transparent,
+                                  activeBackgroundColor: mMainColor,
+                                  firstTime:
+                                      const TimeOfDay(hour: 8, minute: 00),
+                                  lastTime:
+                                      const TimeOfDay(hour: 20, minute: 00),
+                                  initialRange: _timeRange,
+                                  timeStep: 30,
+                                  timeBlock: 30,
+                                  onRangeCompleted: (range) => setState(() {
+                                    _timeRange = range;
+                                    fromTime =
+                                        _timeRange!.start.format(context);
+                                    toTime = _timeRange!.end.format(context);
+                                    print("ftom:  $fromTime  -to :  $toTime");
+                                  }),
+                                  onFirstTimeSelected: (startHour) {},
+                                ),
+                                const SizedBox(height: 30),
+                                if (_timeRange != null)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0, left: 50),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                            'Book From-To: ${_timeRange!.start.format(context)} - ${_timeRange!.end.format(context)}',
+                                            style: timelineBookFont),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          ),
                           GestureDetector(
                             onTap: () async {
                               _handelAddOrEditModel();
                               _handelValidation();
                               PlaygroundInfo newPlaygroundModel =
                                   _handelAddOrEditModel();
-                              BlocProvider.of<AddEditBloc>(context).add(
-                                  AddPlaygroundEvent(
-                                      playgroundModel: newPlaygroundModel));
+                              if (widget.isEdit) {
+                                BlocProvider.of<AddEditBloc>(context).add(
+                                    EditPlaygroundEvent(
+                                        newPlaygroundModel:
+                                            newPlaygroundModel));
+                              } else {
+                                BlocProvider.of<AddEditBloc>(context).add(
+                                    AddPlaygroundEvent(
+                                        playgroundModel: newPlaygroundModel));
+                              }
                             },
                             child: Padding(
                               padding: EdgeInsets.only(top: pageHeight * 0.05),
@@ -461,6 +605,27 @@ class _AddEditPageState extends State<AddEditPage> {
                                     : Center(
                                         child: Text('Add Playground',
                                             style: addEditText)),
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: widget.isEdit,
+                            child: GestureDetector(
+                              onTap: () async {
+                                SharedFunction.navigatorPopFunction(context);
+                              },
+                              child: Padding(
+                                padding:
+                                    EdgeInsets.only(top: pageHeight * 0.005),
+                                child: Container(
+                                    width: pageWidth * 0.5,
+                                    height: pageHeight * 0.05,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(11),
+                                        color: mPrimaryColor),
+                                    child: Center(
+                                        child: Text('cancel',
+                                            style: cancelButtomFont))),
                               ),
                             ),
                           ),
@@ -486,7 +651,10 @@ class _AddEditPageState extends State<AddEditPage> {
         playgroundSize: selectSize!,
         playgroundImage: image!,
         playgroundAvailability: true,
-        playgroundUID: playgroundUID);
+        playgroundUID: playgroundUID,
+        date: dateOfBooking,
+        fromTime: fromTime,
+        toTime: toTime);
     return playgroundModel;
   }
 

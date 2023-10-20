@@ -18,3 +18,5 @@ class LoadingState extends AddEditState {}
 class FailureState extends AddEditState {}
 
 class AddedPlaygroundState extends AddEditState {}
+
+class EditPlaygroundSuccessfully extends AddEditState {}

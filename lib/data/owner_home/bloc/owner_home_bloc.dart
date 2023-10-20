@@ -9,6 +9,7 @@ part 'owner_home_state.dart';
 class OwnerHomeBloc extends Bloc<OwnerHomeEvent, OwnerHomeState> {
   OwnerHomeBloc() : super(OwnerHomeInitial()) {
     on<LoadAllPlaygroundEvent>(_handelFetchAllPlayground);
+    on<DeletePlaygroundEvent>(_handelDeletePlayground);
   }
 }
 
@@ -20,4 +21,17 @@ Future<void> _handelFetchAllPlayground(
       await OwnerHomeRepository.fetchAllPlaygroundFromFirestore();
 
   emit(LoadedAllPlaygroundState(playgroungList: playgroundList));
+}
+
+Future<void> _handelDeletePlayground(
+    DeletePlaygroundEvent event, Emitter<OwnerHomeState> emit) async {
+  emit(LoadingState());
+
+  bool isDeleted = await OwnerHomeRepository.deletePlayground();
+
+  if (isDeleted) {
+    emit(DeletedPlaygroundSuccessfully());
+  } else {
+    emit(FailureState());
+  }
 }

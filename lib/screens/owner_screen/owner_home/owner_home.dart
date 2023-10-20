@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
 import 'package:sportify/data/login_register/login_register_models/owner/owner_model.dart';
 import 'package:sportify/data/profile/profile_bloc/profile_bloc.dart';
@@ -47,6 +48,19 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
               // }
               if (state is LoadedAllPlaygroundState) {
                 playgroundList = state.playgroungList;
+              }
+              if (state is DeletedPlaygroundSuccessfully) {
+                Fluttertoast.showToast(
+                  msg: "The Playground is Deleted successfully",
+                  toastLength: Toast.LENGTH_SHORT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: mMainColor,
+                  textColor: Colors.white,
+                  fontSize: 16.0,
+                );
+
+                SharedFunction.navigatorPushAndRemoveUntilFunction(
+                    context, OwnerHomePage(isOwner: true));
               }
             },
           ),
@@ -220,11 +234,9 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                       ),
                                       ListTile(
                                         onTap: () {
-                                          // BlocProvider.of<OwnerHomeBloc>(
-                                          //         blocContext)
-                                          //     .add(DeleteCarEvent(
-                                          //         carUID: carsList[index]
-                                          //             .carUUID));
+                                          BlocProvider.of<OwnerHomeBloc>(
+                                                  context)
+                                              .add(DeletePlaygroundEvent());
                                         },
                                         title: Center(
                                           child: Text("Delete",

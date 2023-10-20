@@ -40,21 +40,33 @@ TextStyle drawerListTile = GoogleFonts.poppins(
   color: white,
   decoration: TextDecoration.none,
 );
-TextStyle addEditText = GoogleFonts.poppins(
+TextStyle addEditText = GoogleFonts.oswald(
   fontSize: 16,
-  color: white,
+  color: mPrimaryColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );
-TextStyle chooseImageText = GoogleFonts.poppins(
-  fontSize: 10,
-  color: white,
+TextStyle cancelButtomFont = GoogleFonts.oswald(
+  fontSize: 16,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle chooseImageText = GoogleFonts.oswald(
+  fontSize: 12,
+  color: mPrimaryColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );
 TextStyle typeOfPlaygroundText = GoogleFonts.poppins(
   fontSize: 14,
   color: black,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle timelineBookFont = GoogleFonts.poppins(
+  fontSize: 17,
+  color: dark,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );

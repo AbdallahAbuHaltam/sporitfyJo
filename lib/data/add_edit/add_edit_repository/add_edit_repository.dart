@@ -47,13 +47,14 @@ class AddEditRepository {
       final playgroundName = playgroundModel.playgroundName;
       final playgroundType = playgroundModel.playgroundType;
       final playgroundUID = playgroundModel.playgroundUID;
+      final date = playgroundModel.date;
+      final fromTime = playgroundModel.fromTime;
+      final toTime = playgroundModel.toTime;
 
       final playgroundPrice = playgroundModel.playgroundPrice;
       final playgroundSize = playgroundModel.playgroundSize;
       final playgroundImage = playgroundModel.playgroundImage;
       final playgroundAvailability = playgroundModel.playgroundAvailability;
-      await SharedPreferencesManager.saveData(
-          key: 'carUID', value: playgroundUID);
 
       final ownerUID =
           await SharedPreferencesManager.getData(key: 'currentUID');
@@ -66,14 +67,46 @@ class AddEditRepository {
         'playgroundImage': playgroundImage,
         'playgroundAvailability': playgroundAvailability,
         'ownerUID': ownerUID,
-        'playgroundUID': playgroundUID
+        'playgroundUID': playgroundUID,
+        'date': date,
+        'fromTime': fromTime,
+        'toTime': toTime
       };
 
-      await playgroundCollection.doc(playgroundUID).set(playgroundMap);
+      await playgroundCollection.doc(ownerUID).set(playgroundMap);
 
       return true;
     } catch (e) {
       print('Error adding playground to Firestore: $e');
+      return false;
+    }
+  }
+
+  static Future<bool> updateEditPlayground(
+      PlaygroundInfo newPlaygroundModel) async {
+    String ownerUIID =
+        await SharedPreferencesManager.getData(key: 'currentUID');
+    Map<String, dynamic> playgroundDataForFirestore = {
+      'playgroundName': newPlaygroundModel.playgroundName,
+      'playgroundType': newPlaygroundModel.playgroundType,
+      'playgroundPrice': newPlaygroundModel.playgroundPrice,
+      'playgroundSize': newPlaygroundModel.playgroundSize,
+      'playgroundImage': newPlaygroundModel.playgroundImage,
+      'playgroundAvailability': newPlaygroundModel.playgroundAvailability,
+      'ownerUID': ownerUIID,
+      'playgroundUID': newPlaygroundModel.playgroundUID,
+      'date': newPlaygroundModel.date,
+      'fromTime': newPlaygroundModel.fromTime,
+      'toTime': newPlaygroundModel.toTime
+    };
+    try {
+      await playgroundCollection
+          .doc(ownerUIID)
+          .update(playgroundDataForFirestore);
+      print('Document updated successfully');
+      return true;
+    } catch (error) {
+      print('Error updating document: $error');
       return false;
     }
   }

@@ -14,3 +14,5 @@ class LoadedAllPlaygroundState extends OwnerHomeState {
 
   LoadedAllPlaygroundState({required this.playgroungList});
 }
+
+class DeletedPlaygroundSuccessfully extends OwnerHomeState {}
