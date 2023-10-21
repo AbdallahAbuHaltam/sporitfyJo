@@ -9,9 +9,7 @@ part 'player_home_state.dart';
 
 class PlayerHomeBloc extends Bloc<PlayerHomeEvent, PlayerHomeState> {
   PlayerHomeBloc() : super(PlayerHomeInitial()) {
-    on<PlayerHomeEvent>((event, emit) {
       on<LoadAllPlaygroundEvent>(_handelFetchAllPlayground);
-    });
   }
 }
 

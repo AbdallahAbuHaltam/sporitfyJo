@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sportify/screens/player_screen/detail_page/detail_player.dart';
 import 'package:sportify/screens/type_of_user/type_of_user_screen.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 import 'package:sportify/utilities/fonts/fonts.dart';
 
-import '../../data/add_edit/add_edit_model/playground_model.dart';
-import '../../data/player_home/bloc/player_home_bloc.dart';
-import '../profile/profile.dart';
-import '../shared_functions/signup_functions.dart';
+import '../../../data/add_edit/add_edit_model/playground_model.dart';
+import '../../../data/player_home/bloc/player_home_bloc.dart';
+import '../../profile/profile.dart';
+import '../../shared_functions/signup_functions.dart';
 
 class PlayerHome extends StatefulWidget {
   final bool isOwner;
@@ -191,7 +192,7 @@ class _PlayerHomeState extends State<PlayerHome> {
                       SizedBox(
                         height: pageHeight * 0.01,
                       ),
-                       Padding(
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,28 +217,30 @@ class _PlayerHomeState extends State<PlayerHome> {
                                       padding: const EdgeInsets.only(
                                           right:
                                               10.0), // Add your desired padding
-                                      
-                                        child:  Column(
-                                          children: [
-                                            Container(
-                                                height: pageHeight * 0.1,
-                                                width: pageWidth *
-                                                    0.21, // Use pageWidth if you have it defined
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(15),
-                                                  image:  DecorationImage(
-                                                    image: AssetImage(
-                                                        categories[index]['imagePath']),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
+
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            height: pageHeight * 0.1,
+                                            width: pageWidth *
+                                                0.21, // Use pageWidth if you have it defined
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    categories[index]
+                                                        ['imagePath']),
+                                                fit: BoxFit.cover,
                                               ),
-                                              Text(categories[index]['name'],style: homeText3,),
-                                          ],
-                                        ),
-                                        
-                                      
+                                            ),
+                                          ),
+                                          Text(
+                                            categories[index]['name'],
+                                            style: homeText3,
+                                          ),
+                                        ],
+                                      ),
                                     );
                                   },
                                 ),
@@ -261,32 +264,38 @@ class _PlayerHomeState extends State<PlayerHome> {
                             SizedBox(
                               height: pageHeight * 0.015,
                             ),
-                            GestureDetector(
-                              onTap: () {},
-                              onLongPress: () {},
-                              child: SizedBox(
-                                height: pageHeight * 0.28,
-                                width: double.infinity,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: 2,
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          right:
-                                              10.0), // Add your desired padding
-                                      child: Stack(
-                                        children: [
-                                          Container(
+                            SizedBox(
+                              height: pageHeight * 0.28,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: playgroundList.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        right:
+                                            10.0), // Add your desired padding
+                                    child: Stack(
+                                      children: [
+                                        GestureDetector(
+                                          onTap: () =>
+                                        SharedFunction.navigatorPushFunction(
+                                            context,
+                                            DetailPlayer(
+                                              isOwner: false,
+                                              playground: playgroundList[index],
+                                            )),
+                                          child: Container(
                                             height: pageHeight * 0.28,
                                             width: pageWidth *
                                                 0.7, // Use pageWidth if you have it defined
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(15),
-                                              image: const DecorationImage(
-                                                image: AssetImage(
-                                                    'assets/images/stadium.jpg'),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    playgroundList[index]
+                                                        .playgroundImage),
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -332,21 +341,26 @@ class _PlayerHomeState extends State<PlayerHome> {
                                                       Positioned(
                                                         left: pageWidth * 0.04,
                                                         child: Text(
-                                                          'FCB',
+                                                          playgroundList[index]
+                                                              .playgroundName,
                                                           style: cardText,
                                                         ),
                                                       ),
                                                       Positioned(
                                                         left: pageWidth * 0.45,
                                                         child: Text(
-                                                          '5*5',
+                                                          playgroundList[index]
+                                                              .playgroundSize,
                                                           style: homeSizeFont,
                                                         ),
                                                       ),
                                                       Positioned(
                                                         left: pageWidth * 0.04,
                                                         top: pageHeight * 0.04,
-                                                        child: Text('5.0',
+                                                        child: Text(
+                                                            playgroundList[
+                                                                    index]
+                                                                .playgroundPrice,
                                                             style:
                                                                 homePriceFont),
                                                       ),
@@ -386,17 +400,17 @@ class _PlayerHomeState extends State<PlayerHome> {
                                               ],
                                             ),
                                           ),
-                                          Positioned(
-                                            top: 2,
-                                            left: pageWidth * 0.64,
-                                            child:
-                                                const Icon(Icons.sports_soccer),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                                        ),
+                                        Positioned(
+                                          top: 2,
+                                          left: pageWidth * 0.64,
+                                          child:
+                                              const Icon(Icons.sports_soccer),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ],

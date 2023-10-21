@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../data/login_register/bloc/login_register_bloc_bloc.dart';
 import '../../../utilities/colors/utilities.dart';
 import '../../../utilities/fonts/fonts.dart';
-import '../../player_screen/player_home.dart';
+import '../../player_screen/home/player_home.dart';
 
 class PlayerSignUp extends StatefulWidget {
   const PlayerSignUp({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
-import 'package:sportify/screens/player_screen/player_home.dart';
+import 'package:sportify/screens/player_screen/home/player_home.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
 
 import '../../../data/login_register/bloc/login_register_bloc_bloc.dart';

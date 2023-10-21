@@ -21,6 +21,13 @@ TextStyle inFont = GoogleFonts.poppins(
   color: mPrimaryColor,
   decoration: TextDecoration.none,
 );
+TextStyle homeTypeFont = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+  
+);
 
 TextStyle loginText = GoogleFonts.poppins(
   fontSize: 9,
@@ -41,6 +48,12 @@ TextStyle homeText2 = GoogleFonts.poppins(
 );
 TextStyle homeText3 = GoogleFonts.poppins(
   fontSize: 15,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle homeText4 = GoogleFonts.poppins(
+  fontSize: 12,
   color: mMainColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
