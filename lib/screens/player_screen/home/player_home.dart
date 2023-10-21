@@ -9,6 +9,7 @@ import '../../../data/add_edit/add_edit_model/playground_model.dart';
 import '../../../data/player_home/bloc/player_home_bloc.dart';
 import '../../profile/profile.dart';
 import '../../shared_functions/signup_functions.dart';
+import '../../shared_widget/bottom_menu.dart';
 
 class PlayerHome extends StatefulWidget {
   final bool isOwner;
@@ -265,7 +266,7 @@ class _PlayerHomeState extends State<PlayerHome> {
                               height: pageHeight * 0.015,
                             ),
                             SizedBox(
-                              height: pageHeight * 0.28,
+                              height: pageHeight * 0.26,
                               width: double.infinity,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -278,15 +279,16 @@ class _PlayerHomeState extends State<PlayerHome> {
                                     child: Stack(
                                       children: [
                                         GestureDetector(
-                                          onTap: () =>
-                                        SharedFunction.navigatorPushFunction(
-                                            context,
-                                            DetailPlayer(
-                                              isOwner: false,
-                                              playground: playgroundList[index],
-                                            )),
+                                          onTap: () => SharedFunction
+                                              .navigatorPushFunction(
+                                                  context,
+                                                  DetailPlayer(
+                                                    isOwner: false,
+                                                    playground:
+                                                        playgroundList[index],
+                                                  )),
                                           child: Container(
-                                            height: pageHeight * 0.28,
+                                            height: pageHeight * 0.26,
                                             width: pageWidth *
                                                 0.7, // Use pageWidth if you have it defined
                                             decoration: BoxDecoration(
@@ -420,6 +422,7 @@ class _PlayerHomeState extends State<PlayerHome> {
                   ),
                 ),
               ),
+              bottomNavigationBar: const BottomMenu(),
             );
           },
         ),
