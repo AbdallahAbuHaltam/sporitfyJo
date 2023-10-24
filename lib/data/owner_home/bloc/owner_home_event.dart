@@ -4,3 +4,5 @@ part of 'owner_home_bloc.dart';
 sealed class OwnerHomeEvent {}
 
 class LoadAllPlaygroundEvent extends OwnerHomeEvent {}
+
+class DeletePlaygroundEvent extends OwnerHomeEvent {}

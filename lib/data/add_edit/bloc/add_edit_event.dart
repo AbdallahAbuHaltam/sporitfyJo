@@ -10,3 +10,9 @@ class AddPlaygroundEvent extends AddEditEvent {
 
   AddPlaygroundEvent({required this.playgroundModel});
 }
+
+class EditPlaygroundEvent extends AddEditEvent {
+  final PlaygroundInfo newPlaygroundModel;
+
+  EditPlaygroundEvent({required this.newPlaygroundModel});
+}

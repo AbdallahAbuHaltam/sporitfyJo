@@ -7,6 +7,10 @@ const Color mSecondaryColor = Color(0xFFEBE1D5);
 const Color mMainColor = Color(0xFF1F1F2B);
 const Color white = Color(0xFFFFFFFF);
 const Color black = Color(0xFF000000);
+const Color green = Colors.green;
+const Color canNotChang = Color.fromARGB(255, 181, 181, 181);
+
+const dark = Color(0xFF333A47);
 
 //Dark Mode Colors
 const Color dBackgroundColor = Color(0xFF121212);

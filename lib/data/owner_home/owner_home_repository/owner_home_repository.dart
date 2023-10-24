@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/shared_preference/shared_preference.dart';
 
 import '../../login_register/login_register_repo/owner_repo/owner_repository.dart';
 
@@ -22,8 +23,25 @@ class OwnerHomeRepository {
           playgroundSize: playgroundData['playgroundSize'],
           playgroundImage: playgroundData['playgroundImage'],
           playgroundAvailability: playgroundData['playgroundAvailability'],
-          playgroundUID: playgroundData['playgroundUID']);
+          playgroundUID: playgroundData['playgroundUID'],
+          date: playgroundData['date'],
+          fromTime: playgroundData['fromTime'],
+          toTime: playgroundData['toTime']);
     }).toList();
     return playgroundModels;
+  }
+
+  static Future<bool> deletePlayground() async {
+    final ownerUID = await SharedPreferencesManager.getData(key: 'currentUID');
+    try {
+      await FirebaseFirestore.instance
+          .collection('playground')
+          .doc(ownerUID)
+          .delete();
+      return true;
+    } catch (e) {
+      print('Error : $e');
+      return false;
+    }
   }
 }

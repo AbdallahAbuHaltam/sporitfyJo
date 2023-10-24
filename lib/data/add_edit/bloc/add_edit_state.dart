@@ -7,7 +7,7 @@ sealed class AddEditState {}
 final class AddEditInitial extends AddEditState {}
 
 class PickedImageState extends AddEditState {
-  final File image;
+  final String image;
   PickedImageState({
     required this.image,
   });
@@ -18,3 +18,5 @@ class LoadingState extends AddEditState {}
 class FailureState extends AddEditState {}
 
 class AddedPlaygroundState extends AddEditState {}
+
+class EditPlaygroundSuccessfully extends AddEditState {}

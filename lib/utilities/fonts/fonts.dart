@@ -81,15 +81,27 @@ TextStyle drawerListTile = GoogleFonts.poppins(
   color: white,
   decoration: TextDecoration.none,
 );
-TextStyle addEditText = GoogleFonts.poppins(
+TextStyle subAppText = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: mPrimaryColor,
+  decoration: TextDecoration.none,
+);
+TextStyle addEditText = GoogleFonts.oswald(
   fontSize: 16,
-  color: white,
+  color: mPrimaryColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );
-TextStyle chooseImageText = GoogleFonts.poppins(
-  fontSize: 10,
-  color: white,
+TextStyle cancelButtomFont = GoogleFonts.oswald(
+  fontSize: 16,
+  color: mMainColor,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+TextStyle chooseImageText = GoogleFonts.oswald(
+  fontSize: 12,
+  color: mPrimaryColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
 );
@@ -117,6 +129,95 @@ TextStyle homeSizeFont = GoogleFonts.poppins(
 TextStyle homePriceFont = GoogleFonts.poppins(
   fontSize: 12,
   color: Colors.grey,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+TextStyle timelineBookFont = GoogleFonts.poppins(
+  fontSize: 17,
+  color: dark,
+  decoration: TextDecoration.none,
+  fontWeight: FontWeight.bold,
+);
+
+TextStyle homeSizeFont = GoogleFonts.poppins(
+  fontSize: 15,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+  shadows: [
+    Shadow(
+      offset: Offset(
+          2.0, 2.0), // Change the offset values for your desired shadow effect
+      blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
+      color: Color.fromARGB(255, 39, 38, 38).withOpacity(0.5), // Shadow color
+    ),
+  ],
+);
+
+TextStyle homeNameFont = GoogleFonts.oswald(
+  fontSize: 20,
+  color: white,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+  // shadows: [
+  //   Shadow(
+  //     offset: Offset(
+  //         2.0, 2.0), // Change the offset values for your desired shadow effect
+  //     blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
+  //     color:
+  //         Color.fromARGB(255, 188, 188, 188).withOpacity(0.5), // Shadow color
+  //   ),
+  // ],
+);
+TextStyle homeTypeFont = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+  // shadows: [
+  //   Shadow(
+  //     offset: Offset(
+  //         2.0, 2.0), // Change the offset values for your desired shadow effect
+  //     blurRadius: 4.0, // Adjust the blur radius for your desired shadow effect
+  //     color:
+  //         Color.fromARGB(255, 243, 212, 103).withOpacity(0.5), // Shadow color
+  //   ),
+  // ],
+);
+TextStyle homeDetailButtonFont = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+
+TextStyle homePriceFont = GoogleFonts.poppins(
+  fontSize: 16,
+  color: green,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+
+TextStyle nameOfProfilePage = GoogleFonts.teko(
+  fontSize: 22,
+  color: white,
+  decoration: TextDecoration.none,
+);
+
+TextStyle profilePagefont = GoogleFonts.teko(
+  fontSize: 22,
+  color: canNotChang,
+  decoration: TextDecoration.none,
+);
+TextStyle nameOfCarFont = GoogleFonts.teko(
+  fontSize: 22,
+  color: white,
+  decoration: TextDecoration.none,
+);
+
+TextStyle homeBottomSheetFont = GoogleFonts.teko(
+  fontSize: 20,
+  color: mPrimaryColor,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
