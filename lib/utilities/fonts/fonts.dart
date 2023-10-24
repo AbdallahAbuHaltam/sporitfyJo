@@ -41,13 +41,17 @@ TextStyle homeText = GoogleFonts.poppins(
 );
 TextStyle cardText = GoogleFonts.poppins(
     fontSize: 20, color: mMainColor, fontWeight: FontWeight.bold);
+
+TextStyle cardText2 = GoogleFonts.poppins(
+    fontSize: 18, color: mMainColor, fontWeight: FontWeight.bold);
+
 TextStyle homeText2 = GoogleFonts.poppins(
   fontSize: 27,
   color: mMainColor,
   decoration: TextDecoration.none,
 );
 TextStyle homeText3 = GoogleFonts.poppins(
-  fontSize: 15,
+  fontSize: 13,
   color: mMainColor,
   decoration: TextDecoration.none,
   fontWeight: FontWeight.bold,
@@ -111,7 +115,7 @@ TextStyle homeSizeFont = GoogleFonts.poppins(
   // ],
 );
 TextStyle homePriceFont = GoogleFonts.poppins(
-  fontSize: 14,
+  fontSize: 12,
   color: Colors.grey,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
