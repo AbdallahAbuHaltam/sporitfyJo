@@ -98,8 +98,7 @@ class _PlayerHomeState extends State<PlayerHome> {
                         'Profile',
                         style: drawerListTile,
                       ),
-                      onTap: () => SharedFunction.navigatorPushFunction(
-                          context, const ProfilePage()),
+                      onTap: null
                     ),
                     SizedBox(
                       height: pageHeight * 0.01,

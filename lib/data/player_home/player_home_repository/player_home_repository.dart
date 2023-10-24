@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
 
-import '../../login_register/login_register_repo/owner_repo/owner_repository.dart';
 
 class PLayerHomeRepository {
   static Future<List<PlaygroundInfo>> fetchAllPlaygroundFromFirestore() async {
@@ -20,7 +19,11 @@ class PLayerHomeRepository {
           playgroundSize: playgroundData['playgroundSize'],
           playgroundImage: playgroundData['playgroundImage'],
           playgroundAvailability: playgroundData['playgroundAvailability'],
-          playgroundUID: playgroundData['playgroundUID']);
+          playgroundUID: playgroundData['playgroundUID'],
+          date: playgroundData['date'],
+          fromTime: playgroundData['fromTime'],
+          toTime: playgroundData['toTime']
+          );
     }).toList();
     return playgroundModels;
   }
