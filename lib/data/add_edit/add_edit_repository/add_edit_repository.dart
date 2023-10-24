@@ -73,7 +73,7 @@ class AddEditRepository {
         'toTime': toTime
       };
 
-      await playgroundCollection.doc(ownerUID).set(playgroundMap);
+      await playgroundCollection.doc(playgroundUID).set(playgroundMap);
 
       return true;
     } catch (e) {
@@ -84,6 +84,7 @@ class AddEditRepository {
 
   static Future<bool> updateEditPlayground(
       PlaygroundInfo newPlaygroundModel) async {
+    String playgroundUID = newPlaygroundModel.playgroundUID;
     String ownerUIID =
         await SharedPreferencesManager.getData(key: 'currentUID');
     Map<String, dynamic> playgroundDataForFirestore = {
@@ -94,14 +95,14 @@ class AddEditRepository {
       'playgroundImage': newPlaygroundModel.playgroundImage,
       'playgroundAvailability': newPlaygroundModel.playgroundAvailability,
       'ownerUID': ownerUIID,
-      'playgroundUID': newPlaygroundModel.playgroundUID,
+      'playgroundUID': playgroundUID,
       'date': newPlaygroundModel.date,
       'fromTime': newPlaygroundModel.fromTime,
       'toTime': newPlaygroundModel.toTime
     };
     try {
       await playgroundCollection
-          .doc(ownerUIID)
+          .doc(playgroundUID)
           .update(playgroundDataForFirestore);
       print('Document updated successfully');
       return true;
