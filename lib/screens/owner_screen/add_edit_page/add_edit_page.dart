@@ -66,10 +66,13 @@ class _AddEditPageState extends State<AddEditPage> {
           TextEditingController(text: widget.playground!.playgroundName);
       _playgroundPriceController =
           TextEditingController(text: widget.playground!.playgroundPrice);
-      selectTypeOfPlayground = widget.playground!.playgroundType;
       selectSize = widget.playground!.playgroundSize;
       image = widget.playground!.playgroundImage;
       playgroundUID = widget.playground!.playgroundUID;
+      dateOfBooking = widget.playground!.date;
+      fromTime = widget.playground!.fromTime;
+      toTime = widget.playground!.toTime;
+      selectTypeOfPlayground = widget.playground!.playgroundType;
     }
 
     super.initState();

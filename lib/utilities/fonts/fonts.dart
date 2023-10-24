@@ -40,6 +40,12 @@ TextStyle drawerListTile = GoogleFonts.poppins(
   color: white,
   decoration: TextDecoration.none,
 );
+TextStyle subAppText = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: mPrimaryColor,
+  decoration: TextDecoration.none,
+);
 TextStyle addEditText = GoogleFonts.oswald(
   fontSize: 16,
   color: mPrimaryColor,
