@@ -19,7 +19,9 @@ class _DetailPlayerState extends State<DetailPlayer> {
   String dateOfBooking = "";
   String fromTime = "";
   String toTime = "";
+  int selectedIndexType = -1;
 
+  bool playgroundSelected = false;
   final _defaultTimeRange = TimeRangeResult(
     const TimeOfDay(hour: 14, minute: 00),
     const TimeOfDay(hour: 15, minute: 00),
@@ -184,8 +186,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                                 1.0, // Line thickness (this will make it vertical)
                             height: pageHeight *
                                 0.04, // Adjust the height as needed
-                            color:
-                                Colors.black.withOpacity(0.4), // Line color
+                            color: Colors.black.withOpacity(0.4), // Line color
                           ),
                         ),
                         Positioned(
@@ -209,93 +210,109 @@ class _DetailPlayerState extends State<DetailPlayer> {
                   ),
                 ),
               ),
-              Positioned(
-                top: pageHeight * 0.42,
-                child: SizedBox(
-                  width: pageWidth,
-                  height: pageHeight * 0.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                          top: 4,
-                        ),
-                        child: Text(
-                          'Playgrounds',
-                          style: cardText2,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SizedBox(
-                          height: pageHeight * 0.16,
-                          width:
-                              double.infinity, // Adjust the height as needed
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 5,
-                            itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 10.0),
-                                child: Container(
-                                  color: mMainColor,
-                                  width: pageWidth * 0.3,
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: pageHeight * 0.1,
-                                        width: pageWidth * 0.21,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          image: DecorationImage(
-                                            image: AssetImage(
-                                                'assets/images/stadium.jpg'),
-                                            fit: BoxFit.cover,
+              Padding(
+                padding: EdgeInsets.only(top: pageHeight * 0.41),
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    width: pageWidth,
+                    height: pageHeight * 0.8,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: pageWidth,
+                          height: pageHeight * 0.25,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 20.0,
+                                  top: 4,
+                                ),
+                                child: Text(
+                                  'Playgrounds',
+                                  style: cardText2,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: pageHeight * 0.17,
+                                  width: double
+                                      .infinity, // Adjust the height as needed
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 5,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 10.0),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              //TODO: add some state that will be change
+                                              playgroundSelected = true;
+                                              selectedIndexType = index;
+                                            });
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: white,
+                                                border:
+                                                    selectedIndexType == index
+                                                        ? Border.all(
+                                                            color: green,
+                                                            width: 5)
+                                                        : null),
+                                            width: pageWidth * 0.3,
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  height: pageHeight * 0.1,
+                                                  width: pageWidth * 0.21,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/stadium.jpg'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Playground1',
+                                                  style: homeText4,
+                                                ),
+                                                Text(
+                                                  '5X5',
+                                                  style: homeSizeFont,
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Text(
-                                        'Playground1',
-                                        style: homeText4,
-                                      ),
-                                      Text(
-                                        '5X5',
-                                        style: homeSizeFont,
-                                      ),
-                                    ],
+                                      );
+                                    },
                                   ),
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-               Positioned(
-                top: pageHeight * 0.634,
-                child: SizedBox(
-                  width: pageWidth,
-                  height: pageHeight * 0.5,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 20.0,
-                          top: 4,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 20.0,
+                            top: 4,
+                          ),
+                          child: Text(
+                            'Date',
+                            style: cardText2,
+                          ),
                         ),
-                        child: Text(
-                          'Date',
-                          style: cardText2,
-                        ),
-                      ),
-                      Padding(
+                        Padding(
                           padding: EdgeInsets.only(top: pageHeight * 0.02),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -332,7 +349,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                                     left: pageWidth * 0.06),
                                 child: Text(
                                   'Time',
-                                  style:cardText2,
+                                  style: cardText2,
                                 ),
                               ),
                               const SizedBox(height: 20),
@@ -366,17 +383,14 @@ class _DetailPlayerState extends State<DetailPlayer> {
                                 activeBorderColor: dark,
                                 backgroundColor: Colors.transparent,
                                 activeBackgroundColor: mMainColor,
-                                firstTime:
-                                    const TimeOfDay(hour: 8, minute: 00),
-                                lastTime:
-                                    const TimeOfDay(hour: 20, minute: 00),
+                                firstTime: const TimeOfDay(hour: 6, minute: 00),
+                                lastTime: const TimeOfDay(hour: 24, minute: 00),
                                 initialRange: _timeRange,
-                                timeStep: 30,
-                                timeBlock: 30,
+                                timeStep: 120,
+                                timeBlock: 120,
                                 onRangeCompleted: (range) => setState(() {
                                   _timeRange = range;
-                                  fromTime =
-                                      _timeRange!.start.format(context);
+                                  fromTime = _timeRange!.start.format(context);
                                   toTime = _timeRange!.end.format(context);
                                   print("ftom:  $fromTime  -to :  $toTime");
                                 }),
@@ -385,8 +399,8 @@ class _DetailPlayerState extends State<DetailPlayer> {
                               const SizedBox(height: 30),
                               if (_timeRange != null)
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 8.0, left: 50),
+                                  padding:
+                                      const EdgeInsets.only(top: 8.0, left: 50),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -400,13 +414,11 @@ class _DetailPlayerState extends State<DetailPlayer> {
                             ],
                           ),
                         ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-
-              
-
             ],
           ),
         ),
