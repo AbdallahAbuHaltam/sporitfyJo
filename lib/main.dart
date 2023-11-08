@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:sportify/screens/player_screen/detail_page/detail_player.dart';
 import 'package:sportify/screens/player_screen/home/player_home.dart';
 import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
 import 'package:sportify/screens/type_of_user/type_of_user_screen.dart';
@@ -11,7 +12,7 @@ void main() async {
   await Firebase.initializeApp();
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
-  runApp(const MyApp());
+  runApp(const DetailPlayer(isOwner: false,));
 }
 
 class MyApp extends StatelessWidget {

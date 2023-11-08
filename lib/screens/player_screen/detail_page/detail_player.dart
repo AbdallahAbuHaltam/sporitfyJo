@@ -1,30 +1,39 @@
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:sportify/utilities/colors/utilities.dart';
+import 'package:time_range/time_range.dart';
 
 import '../../../data/add_edit/add_edit_model/playground_model.dart';
 import '../../../utilities/fonts/fonts.dart';
 
 class DetailPlayer extends StatefulWidget {
-  final PlaygroundInfo playground;
+  // final PlaygroundInfo playground;
   final bool isOwner;
-  const DetailPlayer(
-      {super.key, required this.playground, required this.isOwner});
+  const DetailPlayer({super.key, required this.isOwner});
 
   @override
   State<DetailPlayer> createState() => _DetailPlayerState();
 }
 
 class _DetailPlayerState extends State<DetailPlayer> {
-  bool selected5x5 = false;
-  bool selected6x6 = false;
+  String dateOfBooking = "";
+  String fromTime = "";
+  String toTime = "";
+
+  final _defaultTimeRange = TimeRangeResult(
+    const TimeOfDay(hour: 14, minute: 00),
+    const TimeOfDay(hour: 15, minute: 00),
+  );
+  TimeRangeResult? _timeRange;
+  bool selectDate = false;
   @override
   Widget build(BuildContext context) {
     double pageWidth = MediaQuery.of(context).size.width;
     double pageHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
           color: white,
           height: pageHeight,
           width: pageWidth,
@@ -33,7 +42,8 @@ class _DetailPlayerState extends State<DetailPlayer> {
               SizedBox(
                 width: pageWidth,
                 height: pageHeight * 0.34,
-                child: Image.network(widget.playground.playgroundImage),
+                child: Image.asset('assets/images/stadium.jpg'),
+                // child: Image.network(widget.playground.playgroundImage),
               ),
               Positioned(
                 top: pageHeight * 0.06,
@@ -80,7 +90,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                           top: pageHeight * 0.01,
                           left: pageWidth * 0.09,
                           child: Text(
-                            widget.playground.playgroundName,
+                            'Fcb',
                             style: cardText,
                           ),
                         ),
@@ -131,7 +141,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                           top: pageHeight * 0.049,
                           left: pageWidth * 0.09,
                           child: Text(
-                            widget.playground.playgroundType,
+                            'football',
                             style: homeSizeFont,
                           ),
                         ),
@@ -160,7 +170,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                           top: pageHeight * 0.11,
                           right: pageWidth * 0.31,
                           child: Text(
-                            '\$${widget.playground.playgroundPrice}',
+                            '\$20',
                             style: homeText3,
                           ),
                         ),
@@ -174,7 +184,8 @@ class _DetailPlayerState extends State<DetailPlayer> {
                                 1.0, // Line thickness (this will make it vertical)
                             height: pageHeight *
                                 0.04, // Adjust the height as needed
-                            color: Colors.black.withOpacity(0.4), // Line color
+                            color:
+                                Colors.black.withOpacity(0.4), // Line color
                           ),
                         ),
                         Positioned(
@@ -189,7 +200,7 @@ class _DetailPlayerState extends State<DetailPlayer> {
                           top: pageHeight * 0.11,
                           right: pageWidth * 0.13,
                           child: Text(
-                            widget.playground.playgroundSize,
+                            '5X5',
                             style: homeText3,
                           ),
                         ),
@@ -217,48 +228,42 @@ class _DetailPlayerState extends State<DetailPlayer> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          height:
-                              pageHeight * 0.16, // Adjust the height as needed
+                          height: pageHeight * 0.16,
+                          width:
+                              double.infinity, // Adjust the height as needed
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 2,
+                            itemCount: 5,
                             itemBuilder: (context, index) {
                               return Padding(
-                                padding: EdgeInsets.only(
-                                  top: pageHeight * 0.003,
-                                  bottom: pageHeight * 0.02,
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                      left: pageWidth * 0.2,
-                                      ),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                padding: const EdgeInsets.only(right: 10.0),
+                                child: Container(
+                                  color: mMainColor,
+                                  width: pageWidth * 0.3,
+                                  child: Column(
                                     children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            selected6x6 = !selected6x6;
-                                          });
-                                        },
-                                        child: Container(
-                                          width: pageWidth * 0.23,
-                                          height: pageHeight * 0.13,
-                                          decoration: BoxDecoration(
-                                              color: selected6x6
-                                                  ? mPrimaryColor
-                                                  : mMainColor,
-                                              shape: BoxShape.circle),
-                                          child: Center(
-                                            child: Text(
-                                              widget.playground.playgroundSize,
-                                              style: sizeOfPlaygroundFont,
-                                            ),
+                                      Container(
+                                        height: pageHeight * 0.1,
+                                        width: pageWidth * 0.21,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'assets/images/stadium.jpg'),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
+                                      ),
+                                      Text(
+                                        'Playground1',
+                                        style: homeText4,
+                                      ),
+                                      Text(
+                                        '5X5',
+                                        style: homeSizeFont,
                                       ),
                                     ],
                                   ),
@@ -272,6 +277,136 @@ class _DetailPlayerState extends State<DetailPlayer> {
                   ),
                 ),
               ),
+               Positioned(
+                top: pageHeight * 0.634,
+                child: SizedBox(
+                  width: pageWidth,
+                  height: pageHeight * 0.5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20.0,
+                          top: 4,
+                        ),
+                        child: Text(
+                          'Date',
+                          style: cardText2,
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(top: pageHeight * 0.02),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              DatePicker(
+                                DateTime.now(),
+                                initialSelectedDate: DateTime.now(),
+                                selectionColor: mMainColor,
+                                selectedTextColor: mPrimaryColor,
+                                onDateChange: (date) {
+                                  // New date selected
+                                  setState(() {
+                                    // selectedValue = date;
+
+                                    List<String> splitDate =
+                                        date.toString().split(' ');
+                                    dateOfBooking = splitDate[0];
+                                    print(dateOfBooking);
+                                    selectDate = true;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                          visible: selectDate,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(
+                                    top: pageHeight * 0.03,
+                                    left: pageWidth * 0.06),
+                                child: Text(
+                                  'Time',
+                                  style:cardText2,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              TimeRange(
+                                fromTitle: const Text(
+                                  'FROM',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: dark,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                toTitle: const Text(
+                                  'TO',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: dark,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                titlePadding: 50,
+                                textStyle: const TextStyle(
+                                  fontWeight: FontWeight.normal,
+                                  color: dark,
+                                ),
+                                activeTextStyle: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: mPrimaryColor,
+                                ),
+                                borderColor: dark,
+                                activeBorderColor: dark,
+                                backgroundColor: Colors.transparent,
+                                activeBackgroundColor: mMainColor,
+                                firstTime:
+                                    const TimeOfDay(hour: 8, minute: 00),
+                                lastTime:
+                                    const TimeOfDay(hour: 20, minute: 00),
+                                initialRange: _timeRange,
+                                timeStep: 30,
+                                timeBlock: 30,
+                                onRangeCompleted: (range) => setState(() {
+                                  _timeRange = range;
+                                  fromTime =
+                                      _timeRange!.start.format(context);
+                                  toTime = _timeRange!.end.format(context);
+                                  print("ftom:  $fromTime  -to :  $toTime");
+                                }),
+                                onFirstTimeSelected: (startHour) {},
+                              ),
+                              const SizedBox(height: 30),
+                              if (_timeRange != null)
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8.0, left: 50),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                          'Book From-To: ${_timeRange!.start.format(context)} - ${_timeRange!.end.format(context)}',
+                                          style: timelineBookFont),
+                                    ],
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+
+              
+
             ],
           ),
         ),

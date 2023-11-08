@@ -7,7 +7,6 @@ import 'package:sportify/utilities/fonts/fonts.dart';
 
 import '../../../data/add_edit/add_edit_model/playground_model.dart';
 import '../../../data/player_home/bloc/player_home_bloc.dart';
-import '../../profile/profile.dart';
 import '../../shared_functions/signup_functions.dart';
 import '../../shared_widget/bottom_menu.dart';
 
@@ -283,8 +282,8 @@ class _PlayerHomeState extends State<PlayerHome> {
                                                   context,
                                                   DetailPlayer(
                                                     isOwner: false,
-                                                    playground:
-                                                        playgroundList[index],
+                                                    // playground:
+                                                    //     playgroundList[index],
                                                   )),
                                           child: Container(
                                             height: pageHeight * 0.26,
