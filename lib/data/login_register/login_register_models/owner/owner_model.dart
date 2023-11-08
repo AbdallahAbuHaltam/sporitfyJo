@@ -1,23 +1,23 @@
 class OwnerInfo {
   final String ownerEmail;
   final String ownerPassword;
-  final String ownerName;
+  final String playgroundName;
   final String ownerUUId;
   final String ownerPhone;
   OwnerInfo({
     required this.ownerEmail,
     required this.ownerPassword,
-    required this.ownerName,
+    required this.playgroundName,
     required this.ownerUUId,
     required this.ownerPhone,
   });
 
-   Map<String, dynamic> toJosn() {
+  Map<String, dynamic> toJosn() {
     return {
       'ownerEmail': ownerEmail,
       'ownerPassword': ownerPassword,
       'ownerUUId': ownerUUId,
-      'ownerName': ownerName,
+      'ownerName': playgroundName,
       'ownerPhone': ownerPhone,
     };
   }
@@ -27,9 +27,8 @@ class OwnerInfo {
       ownerEmail: json['ownerEmail'],
       ownerPassword: json['ownerPassword'],
       ownerUUId: json['ownerUUId'],
-      ownerName: json['ownerName'],
+      playgroundName: json['ownerName'],
       ownerPhone: json['ownerPhone'],
     );
   }
-
 }

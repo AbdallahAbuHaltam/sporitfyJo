@@ -5,4 +5,8 @@ sealed class OwnerHomeEvent {}
 
 class LoadAllPlaygroundEvent extends OwnerHomeEvent {}
 
-class DeletePlaygroundEvent extends OwnerHomeEvent {}
+class DeletePlaygroundEvent extends OwnerHomeEvent {
+  final String playgroundUID;
+
+  DeletePlaygroundEvent({required this.playgroundUID});
+}

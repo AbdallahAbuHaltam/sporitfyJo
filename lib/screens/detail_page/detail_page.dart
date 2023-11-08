@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/main_playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/sub_playground_model.dart';
 import 'package:sportify/data/login_register/login_register_models/player/player_model.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -9,7 +10,7 @@ import 'package:sportify/utilities/fonts/fonts.dart';
 import '../../utilities/colors/utilities.dart';
 
 class DetailPage extends StatefulWidget {
-  final PlaygroundInfo playground;
+  final SubPlaygroundModel playground;
   final bool isOwner;
   const DetailPage(
       {super.key, required this.playground, required this.isOwner});
@@ -93,7 +94,7 @@ class _DetailPageState extends State<DetailPage> {
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: widget.playground.playgroundName,
+                                text: widget.playground.playgroundNumber,
                                 style: homeNameFont,
                                 children: <TextSpan>[
                                   TextSpan(

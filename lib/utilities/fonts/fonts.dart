@@ -26,7 +26,6 @@ TextStyle homeTypeFont = GoogleFonts.poppins(
   color: mPrimaryColor,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
-  
 );
 
 TextStyle loginText = GoogleFonts.poppins(
@@ -82,9 +81,15 @@ TextStyle drawerListTile = GoogleFonts.poppins(
   decoration: TextDecoration.none,
 );
 TextStyle subAppText = GoogleFonts.poppins(
-  fontSize: 15,
+  fontSize: 14,
   fontWeight: FontWeight.bold,
   color: mPrimaryColor,
+  decoration: TextDecoration.none,
+);
+TextStyle labelText = GoogleFonts.poppins(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: mMainColor,
   decoration: TextDecoration.none,
 );
 TextStyle addEditText = GoogleFonts.oswald(
@@ -139,8 +144,6 @@ TextStyle timelineBookFont = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
 );
 
-
-
 TextStyle homeNameFont = GoogleFonts.oswald(
   fontSize: 20,
   color: white,
@@ -164,7 +167,18 @@ TextStyle homeDetailButtonFont = GoogleFonts.poppins(
   decoration: TextDecoration.none,
 );
 
-
+TextStyle continueButtonFont = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+TextStyle backButtonFont = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mMainColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
 
 TextStyle nameOfProfilePage = GoogleFonts.teko(
   fontSize: 22,
@@ -186,6 +200,13 @@ TextStyle nameOfCarFont = GoogleFonts.teko(
 TextStyle homeBottomSheetFont = GoogleFonts.teko(
   fontSize: 20,
   color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
+
+TextStyle infoTitleFont = GoogleFonts.teko(
+  fontSize: 28,
+  color: mMainColor,
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );

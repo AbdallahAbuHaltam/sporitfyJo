@@ -33,7 +33,7 @@ class ProfileRepository {
     OwnerInfo ownerInformation = OwnerInfo(
         ownerEmail: ownerMap['Email'],
         ownerPassword: ownerMap['Password'],
-        ownerName: ownerMap['Name'],
+        playgroundName: ownerMap['Name'],
         ownerUUId: ownerMap['ownerUID'],
         ownerPhone: ownerMap['Phone number']);
     return ownerInformation;

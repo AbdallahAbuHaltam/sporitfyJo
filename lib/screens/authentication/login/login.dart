@@ -31,11 +31,11 @@ class _LoginPageState extends State<LoginPage> {
       create: (context) => LoginRegisterBlocBloc(),
       child: BlocConsumer<LoginRegisterBlocBloc, LoginRegisterBlocState>(
         listener: (context, state) {
-           if (state is LoginRegisterLoaded) {
-              _navigateToHomePage();
-            } else if (state is LoginRegisterFailure) {
-              const Text('something wrong , try  again later');
-            }
+          if (state is LoginRegisterLoaded) {
+            // _navigateToHomePage();
+          } else if (state is LoginRegisterFailure) {
+            const Text('something wrong , try  again later');
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -152,11 +152,11 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         onPressed: () {
-                           BlocProvider.of<LoginRegisterBlocBloc>(context)
-                               .add(LoginSuccessEvent(
-                             email: _emailController.text,
-                             password: _passwordController.text,
-                           ));
+                          BlocProvider.of<LoginRegisterBlocBloc>(context)
+                              .add(LoginSuccessEvent(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ));
                         },
                         child: const Padding(
                           padding: EdgeInsets.only(
@@ -211,28 +211,25 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  void _navigateToHomePage() async {
-    try {
-      await Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (context) {
-          if (widget.isOwner == true) {
-            return  OwnerHomePage(
-              isOwner: true,
-            );
-          } else {
-            return  PlayerHome(
-              isOwner: false,
-            );
-          }
-        }),
-        (route) => false,
-      );
-    } catch (e) {
-      print("Login error__________________________________: $e");
-    }
-  }
+  // void _navigateToHomePage() async {
+  //   try {
+  //     await Navigator.pushAndRemoveUntil(
+  //       context,
+  //       MaterialPageRoute(builder: (context) {
+  //         if (widget.isOwner == true) {
+  //           return  OwnerHomePage(
+  //             isOwner: true,
+  //           );
+  //         } else {
+  //           return  PlayerHome(
+  //             isOwner: false,
+  //           );
+  //         }
+  //       }),
+  //       (route) => false,
+  //     );
+  //   } catch (e) {
+  //     print("Login error__________________________________: $e");
+  //   }
+  // }
 }
-
-
-

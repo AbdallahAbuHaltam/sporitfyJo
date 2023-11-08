@@ -38,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     _nameController = TextEditingController(
         text: widget.isOwner
-            ? widget.ownerInfo!.ownerName
+            ? widget.ownerInfo!.playgroundName
             : widget.playerInfo!.playerName);
   }
 

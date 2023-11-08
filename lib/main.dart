@@ -55,14 +55,16 @@ class MyApp extends StatelessWidget {
                 String? currentType = typeSnapshot.data;
 
                 if (currentType == 'owner') {
-                  return  OwnerHomePage(
+                  return OwnerHomePage(
                     isOwner: true,
                   );
-                } else if (currentType == 'player') {
-                  return  PlayerHome(
-                    isOwner: false,
-                  );
-                } else {
+                }
+                // else if (currentType == 'player') {
+                //   return  PlayerHome(
+                //     isOwner: false,
+                //   );
+                // }
+                else {
                   return const TypeOfUser();
                 }
               },
@@ -75,5 +77,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

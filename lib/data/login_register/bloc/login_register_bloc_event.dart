@@ -4,14 +4,30 @@ part of 'login_register_bloc_bloc.dart';
 @immutable
 sealed class LoginRegisterBlocEvent {}
 
-
-class OwnerSignUpEvent extends LoginRegisterBlocEvent{
+class OwnerSignUpEvent extends LoginRegisterBlocEvent {
   final String email;
   final String password;
   final OwnerInfo ownerInfo;
+  final MainPlaygroundModel playgroundModel;
 
-  OwnerSignUpEvent({required this.email, required this.password,required this.ownerInfo});
+  OwnerSignUpEvent({
+    required this.email,
+    required this.password,
+    required this.ownerInfo,
+    required this.playgroundModel,
+  });
+}
 
+class CreateNewPlaygroundEvent extends LoginRegisterBlocEvent {
+  final MainPlaygroundModel playgroundModel;
+  final String email;
+  final String password;
+
+  CreateNewPlaygroundEvent({
+    required this.playgroundModel,
+    required this.email,
+    required this.password,
+  });
 }
 
 class PlayerSignUpEvent extends LoginRegisterBlocEvent {
@@ -25,17 +41,11 @@ class PlayerSignUpEvent extends LoginRegisterBlocEvent {
   });
 }
 
-class LogoutEvent extends LoginRegisterBlocEvent{
+class LogoutEvent extends LoginRegisterBlocEvent {}
 
-}
-
-class LoginSuccessEvent extends LoginRegisterBlocEvent{
+class LoginSuccessEvent extends LoginRegisterBlocEvent {
   final String email;
   final String password;
 
-  LoginSuccessEvent({ required this.email,required this.password});
-
-
+  LoginSuccessEvent({required this.email, required this.password});
 }
-
-

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sportify/data/add_edit/add_edit_model/main_playground_model.dart';
 import 'package:sportify/screens/owner_screen/owner_home/owner_home.dart';
 import 'package:sportify/screens/shared_functions/signup_functions.dart';
 import 'package:sportify/screens/shared_widget/widgets.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../../data/login_register/bloc/login_register_bloc_bloc.dart';
 import '../../../data/login_register/login_register_models/owner/owner_model.dart';
@@ -46,14 +48,15 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
       create: (context) => LoginRegisterBlocBloc(),
       child: BlocConsumer<LoginRegisterBlocBloc, LoginRegisterBlocState>(
         listener: (context, state) {
-          // TODO: implement listener
-           if (state is LoginRegisterLoading) {
-              const CircularProgressIndicator();
-            } else if (state is LoginRegisterLoaded) {
-              _navigateToHomePage();
-            } else if (state is LoginRegisterFailure) {
-              const Text("Something is wrong !");
-            }
+          if (state is LoginRegisterLoading) {
+            const CircularProgressIndicator();
+          } else if (state is LoginRegisterLoaded) {
+            print("Playground for owner added successfully !!");
+            _navigateToHomePage();
+          } else if (state is LoginRegisterFailure) {
+            const Text("Something is wrong !");
+          }
+          if (state is CreateNewPlaygroundState) {}
         },
         builder: (context, state) {
           return Scaffold(
@@ -357,16 +360,23 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
                               ),
                             ),
                             onPressed: () async {
-                               _handelSignUp();
-                               OwnerInfo newOwnerModel = await ownerModelData();
-
-                               BlocProvider.of<LoginRegisterBlocBloc>(context).add(
-                                 OwnerSignUpEvent(
-                                   ownerInfo: newOwnerModel,
-                                   email: _emailController.text,
-                                   password: _passwordController.text,
-                                 ),
-                               );
+                              _handelSignUp();
+                              OwnerInfo newOwnerModel = await ownerModelData();
+                              MainPlaygroundModel playgroundModel =
+                                  await playgroundModelData();
+                              BlocProvider.of<LoginRegisterBlocBloc>(context)
+                                  .add(
+                                OwnerSignUpEvent(
+                                    ownerInfo: newOwnerModel,
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                    playgroundModel: playgroundModel),
+                              );
+                              // BlocProvider.of<LoginRegisterBlocBloc>(context)
+                              //     .add(CreateNewPlaygroundEvent(
+                              //         email: _emailController.text,
+                              //         password: _passwordController.text,
+                              //         playgroundModel: playgroundModel));
                             },
                             child: const Padding(
                               padding: EdgeInsets.only(
@@ -387,7 +397,8 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
       ),
     );
   }
-   void _handelSignUp() async {
+
+  void _handelSignUp() async {
     if (_phoneNumberController.text.isNotEmpty) {
       setState(() {
         phoneHasError = false;
@@ -408,12 +419,13 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
-  void _navigateToHomePage()  {
+
+  void _navigateToHomePage() {
     // OwnerInfo newOwnerModel = await ownerModelData();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (context) =>  OwnerHomePage(
+        builder: (context) => OwnerHomePage(
           isOwner: true,
         ),
       ),
@@ -421,15 +433,27 @@ class _OwnerSignUpState extends State<OwnerSignUp> {
     );
   }
 
-    Future<OwnerInfo> ownerModelData() async {
+  Future<OwnerInfo> ownerModelData() async {
     OwnerInfo newOwnerModel = OwnerInfo(
-        ownerEmail: _emailController.text,
-        ownerPassword: _passwordController.text,
-        ownerUUId: '',
-        ownerName: _nameController.text,
-        ownerPhone: _phoneNumberController.text,
-        );
+      ownerEmail: _emailController.text,
+      ownerPassword: _passwordController.text,
+      ownerUUId: '',
+      playgroundName: _nameController.text,
+      ownerPhone: _phoneNumberController.text,
+    );
 
     return newOwnerModel;
+  }
+
+  String generateUID() {
+    const uuid = Uuid();
+    return uuid.v4();
+  }
+
+  Future<MainPlaygroundModel> playgroundModelData() async {
+    MainPlaygroundModel playgroundModel =
+        MainPlaygroundModel(playgroundName: _nameController.text, ownerUID: '');
+
+    return playgroundModel;
   }
 }

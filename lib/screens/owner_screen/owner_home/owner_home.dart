@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/main_playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/sub_playground_model.dart';
 import 'package:sportify/data/login_register/login_register_models/owner/owner_model.dart';
 import 'package:sportify/data/profile/profile_bloc/profile_bloc.dart';
 import 'package:sportify/screens/detail_page/detail_page.dart';
@@ -25,7 +26,7 @@ class OwnerHomePage extends StatefulWidget {
 }
 
 class _OwnerHomePageState extends State<OwnerHomePage> {
-  List<PlaygroundInfo> playgroundList = [];
+  List<SubPlaygroundModel> playgroundList = [];
   OwnerInfo? ownerInfo;
   @override
   Widget build(BuildContext context) {
@@ -43,9 +44,6 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
         listeners: [
           BlocListener<OwnerHomeBloc, OwnerHomeState>(
             listener: (context, state) {
-              // if (state is LoadingState) {
-              //   const Center(child: CircularProgressIndicator());
-              // }
               if (state is LoadedAllPlaygroundState) {
                 playgroundList = state.playgroungList;
               }
@@ -93,7 +91,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                   heroTag: "button2",
                   backgroundColor: mMainColor,
                   onPressed: () {
-                    SharedFunction.navigatorPushFunction(
+                    SharedFunction.navigatorPushAndRemoveUntilFunction(
                         context, AddEditPage(isEdit: false));
                   },
                   child: const Icon(
@@ -229,7 +227,7 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                               children: [
                                 Text(
                                   "Your playground",
-                                  style: subAppText,
+                                  style: labelText,
                                 ),
                                 TextButton(
                                     onPressed: () {},
@@ -319,8 +317,11 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                                           BlocProvider.of<
                                                                       OwnerHomeBloc>(
                                                                   context)
-                                                              .add(
-                                                                  DeletePlaygroundEvent());
+                                                              .add(DeletePlaygroundEvent(
+                                                                  playgroundUID:
+                                                                      playgroundList[
+                                                                              index]
+                                                                          .playgroundUID));
                                                         },
                                                         title: Center(
                                                           child: Text("Delete",
@@ -343,137 +344,143 @@ class _OwnerHomePageState extends State<OwnerHomePage> {
                                                       playgroundList[index],
                                                   isOwner: true));
                                         },
-                                        child: Container(
-                                          height: pageHeight * 0.2,
-                                          width: pageWidth *
-                                              0.6, // Use pageWidth if you have it defined
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            image: DecorationImage(
-                                              image: NetworkImage(
-                                                  playgroundList[index]
-                                                      .playgroundImage),
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          child: Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                                gradient: LinearGradient(
-                                                  begin: Alignment.topCenter,
-                                                  end: Alignment.bottomCenter,
-                                                  colors: <Color>[
-                                                    Color.fromARGB(
-                                                            179, 102, 102, 102)
-                                                        .withAlpha(210),
-                                                    Color.fromARGB(
-                                                            179, 102, 102, 102)
-                                                        .withAlpha(210),
-                                                    Color.fromARGB(
-                                                            179, 102, 102, 102)
-                                                        .withAlpha(210),
-                                                  ],
-                                                ),
+                                        child: Padding(
+                                          padding: EdgeInsets.only(
+                                              left: pageWidth * 0.04,
+                                              right: pageWidth * 0.04),
+                                          child: Container(
+                                            height: pageHeight * 0.2,
+                                            width: pageWidth *
+                                                0.6, // Use pageWidth if you have it defined
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    playgroundList[index]
+                                                        .playgroundImage),
+                                                fit: BoxFit.cover,
                                               ),
-                                              width: pageWidth * 0.6,
-                                              height: pageHeight * 0.1,
-                                              child: Stack(
-                                                children: [
-                                                  Positioned(
-                                                      left: pageWidth * 0.5,
-                                                      child: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                                shape: BoxShape
-                                                                    .circle,
-                                                                color:
-                                                                    mMainColor),
-                                                        width: 40,
-                                                        height: 40,
-                                                        child: Center(
-                                                          child: Text(
-                                                            playgroundList[
-                                                                    index]
-                                                                .playgroundSize,
-                                                            style: homeSizeFont,
+                                            ),
+                                            child: Align(
+                                              alignment: Alignment.bottomCenter,
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(15),
+                                                  gradient: LinearGradient(
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                    colors: <Color>[
+                                                      Color.fromARGB(179, 102,
+                                                              102, 102)
+                                                          .withAlpha(210),
+                                                      Color.fromARGB(179, 102,
+                                                              102, 102)
+                                                          .withAlpha(210),
+                                                      Color.fromARGB(179, 102,
+                                                              102, 102)
+                                                          .withAlpha(210),
+                                                    ],
+                                                  ),
+                                                ),
+                                                width: pageWidth * 0.6,
+                                                height: pageHeight * 0.1,
+                                                child: Stack(
+                                                  children: [
+                                                    Positioned(
+                                                        left: pageWidth * 0.5,
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  color:
+                                                                      mMainColor),
+                                                          width: 40,
+                                                          height: 40,
+                                                          child: Center(
+                                                            child: Text(
+                                                              playgroundList[
+                                                                      index]
+                                                                  .playgroundSize,
+                                                              style:
+                                                                  homeSizeFont,
+                                                            ),
                                                           ),
-                                                        ),
-                                                      )),
-                                                  Positioned(
-                                                      top: 0,
+                                                        )),
+                                                    Positioned(
+                                                        top: 0,
+                                                        left: 10,
+                                                        child: Text(
+                                                          playgroundList[index]
+                                                              .playgroundNumber,
+                                                          style: homeNameFont,
+                                                        )),
+                                                    Positioned(
+                                                      top: 30,
                                                       left: 10,
                                                       child: Text(
                                                         playgroundList[index]
-                                                            .playgroundName,
-                                                        style: homeNameFont,
-                                                      )),
-                                                  Positioned(
-                                                    top: 30,
-                                                    left: 10,
-                                                    child: Text(
-                                                      playgroundList[index]
-                                                          .playgroundType,
-                                                      style: homeTypeFont,
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    top: 50,
-                                                    left: 10,
-                                                    child: Text(
-                                                      "${playgroundList[index].playgroundPrice} \$",
-                                                      style: homePriceFont,
-                                                    ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.bottomRight,
-                                                    child: Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .only(
-                                                                topLeft: Radius
-                                                                    .circular(
-                                                                        20),
-                                                              ),
-                                                              color:
-                                                                  mMainColor),
-                                                      width: 85,
-                                                      height: 30,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(left: 0),
-                                                        child: Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding: EdgeInsets.only(
-                                                                  left:
-                                                                      pageWidth *
-                                                                          0.03),
-                                                              child: Text(
-                                                                  "Details",
-                                                                  style:
-                                                                      homeDetailButtonFont),
-                                                            ),
-                                                            const Icon(
-                                                              Icons
-                                                                  .arrow_forward_ios,
-                                                              color:
-                                                                  mPrimaryColor,
-                                                              size: 20,
-                                                            )
-                                                          ],
-                                                        ),
+                                                            .playgroundType,
+                                                        style: homeTypeFont,
                                                       ),
                                                     ),
-                                                  )
-                                                ],
+                                                    Positioned(
+                                                      top: 50,
+                                                      left: 10,
+                                                      child: Text(
+                                                        "${playgroundList[index].playgroundPrice} \$",
+                                                        style: homePriceFont,
+                                                      ),
+                                                    ),
+                                                    Align(
+                                                      alignment:
+                                                          Alignment.bottomRight,
+                                                      child: Container(
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          20),
+                                                                ),
+                                                                color:
+                                                                    mMainColor),
+                                                        width: 85,
+                                                        height: 30,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left: 0),
+                                                          child: Row(
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsets.only(
+                                                                    left: pageWidth *
+                                                                        0.03),
+                                                                child: Text(
+                                                                    "Details",
+                                                                    style:
+                                                                        homeDetailButtonFont),
+                                                              ),
+                                                              const Icon(
+                                                                Icons
+                                                                    .arrow_forward_ios,
+                                                                color:
+                                                                    mPrimaryColor,
+                                                                size: 20,
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),

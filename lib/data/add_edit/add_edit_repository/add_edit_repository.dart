@@ -3,13 +3,16 @@ import 'dart:math';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/main_playground_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sportify/data/add_edit/add_edit_model/sub_playground_model.dart';
 import '../../../shared_preference/shared_preference.dart';
 
 class AddEditRepository {
-  static CollectionReference playgroundCollection =
-      FirebaseFirestore.instance.collection('playground');
+  static final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  static final CollectionReference mainPlaygroundCollection =
+      firestore.collection('playground');
 
   static Future<String?> uploadImage() async {
     File? image;
@@ -42,38 +45,40 @@ class AddEditRepository {
   }
 
   static Future<bool> addPlaygroundToFirestore(
-      {required PlaygroundInfo playgroundModel}) async {
+      {required SubPlaygroundModel playgroundModel}) async {
     try {
-      final playgroundName = playgroundModel.playgroundName;
+      final ownerUID =
+          await SharedPreferencesManager.getData(key: 'currentUID');
+      final DocumentSnapshot<Map<String, dynamic>> ownerMap =
+          await firestore.collection('owner').doc(ownerUID).get();
+
+      String playgroundName = ownerMap.data()?['playgroundName'] ?? "null";
+
+      final playgroundNumber = playgroundModel.playgroundNumber;
       final playgroundType = playgroundModel.playgroundType;
       final playgroundUID = playgroundModel.playgroundUID;
-      final date = playgroundModel.date;
-      final fromTime = playgroundModel.fromTime;
-      final toTime = playgroundModel.toTime;
-
       final playgroundPrice = playgroundModel.playgroundPrice;
       final playgroundSize = playgroundModel.playgroundSize;
       final playgroundImage = playgroundModel.playgroundImage;
       final playgroundAvailability = playgroundModel.playgroundAvailability;
+      final playersNames = playgroundModel.playersNames;
 
-      final ownerUID =
-          await SharedPreferencesManager.getData(key: 'currentUID');
-
-      final playgroundMap = {
+      final subPlaygroundMap = {
+        'playgroundNuber': playgroundNumber,
         'playgroundName': playgroundName,
         'playgroundType': playgroundType,
         'playgroundPrice': playgroundPrice,
         'playgroundSize': playgroundSize,
         'playgroundImage': playgroundImage,
-        'playgroundAvailability': playgroundAvailability,
-        'ownerUID': ownerUID,
+        'playersNames': playersNames,
         'playgroundUID': playgroundUID,
-        'date': date,
-        'fromTime': fromTime,
-        'toTime': toTime
+        'playgroundAvailability': playgroundAvailability,
       };
+      final CollectionReference subCollection = mainPlaygroundCollection
+          .doc(ownerUID)
+          .collection('subPlaygroundCollection');
 
-      await playgroundCollection.doc(playgroundUID).set(playgroundMap);
+      await subCollection.doc(playgroundUID).set(subPlaygroundMap);
 
       return true;
     } catch (e) {
@@ -83,27 +88,45 @@ class AddEditRepository {
   }
 
   static Future<bool> updateEditPlayground(
-      PlaygroundInfo newPlaygroundModel) async {
-    String playgroundUID = newPlaygroundModel.playgroundUID;
-    String ownerUIID =
-        await SharedPreferencesManager.getData(key: 'currentUID');
-    Map<String, dynamic> playgroundDataForFirestore = {
-      'playgroundName': newPlaygroundModel.playgroundName,
-      'playgroundType': newPlaygroundModel.playgroundType,
-      'playgroundPrice': newPlaygroundModel.playgroundPrice,
-      'playgroundSize': newPlaygroundModel.playgroundSize,
-      'playgroundImage': newPlaygroundModel.playgroundImage,
-      'playgroundAvailability': newPlaygroundModel.playgroundAvailability,
-      'ownerUID': ownerUIID,
+      SubPlaygroundModel newPlaygroundModel) async {
+    final ownerUID = await SharedPreferencesManager.getData(key: 'currentUID');
+
+    DocumentSnapshot<Map<String, dynamic>> ownerMap =
+        await firestore.collection('owner').doc(ownerUID).get();
+
+    final playgroundName = await firestore
+        .collection('owner')
+        .doc(ownerUID)
+        .get(ownerMap['playgroundName']);
+
+    final playgroundNumber = newPlaygroundModel.playgroundNumber;
+    final playgroundType = newPlaygroundModel.playgroundType;
+    final playgroundUID = newPlaygroundModel.playgroundUID;
+    final playgroundPrice = newPlaygroundModel.playgroundPrice;
+    final playgroundSize = newPlaygroundModel.playgroundSize;
+    final playgroundImage = newPlaygroundModel.playgroundImage;
+    final playgroundAvailability = newPlaygroundModel.playgroundAvailability;
+    final playersNames = newPlaygroundModel.playersNames;
+
+    final subPlaygroundMap = {
+      'playgroundNumber': playgroundNumber,
+      'playgroundName': playgroundName,
+      'playgroundType': playgroundType,
+      'playgroundPrice': playgroundPrice,
+      'playgroundSize': playgroundSize,
+      'playgroundImage': playgroundImage,
+      'playersNames': playersNames,
       'playgroundUID': playgroundUID,
-      'date': newPlaygroundModel.date,
-      'fromTime': newPlaygroundModel.fromTime,
-      'toTime': newPlaygroundModel.toTime
+      'playgroundAvailability': playgroundAvailability,
     };
     try {
-      await playgroundCollection
+      final mainPlaygroundCollection = firestore.collection('playground');
+      final subCollection = mainPlaygroundCollection
           .doc(playgroundUID)
-          .update(playgroundDataForFirestore);
+          .collection('subPlaygroundCollection');
+
+      await subCollection.doc(playgroundUID).update(subPlaygroundMap);
+
       print('Document updated successfully');
       return true;
     } catch (error) {

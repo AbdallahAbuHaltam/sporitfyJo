@@ -1,10 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages, avoid_print
 
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-import 'package:sportify/data/add_edit/add_edit_model/playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/main_playground_model.dart';
+import 'package:sportify/data/add_edit/add_edit_model/sub_playground_model.dart';
 import 'package:sportify/data/add_edit/add_edit_repository/add_edit_repository.dart';
 import 'package:sportify/shared_preference/shared_preference.dart';
 
@@ -22,8 +22,14 @@ class AddEditBloc extends Bloc<AddEditEvent, AddEditState> {
 Future<void> _handelPickImage(
     ChoosingImageEvent event, Emitter<AddEditState> emit) async {
   try {
+    emit(LoadingImageState());
+
     String? image = await AddEditRepository.uploadImage();
-    emit(PickedImageState(image: image!));
+    if (image != null) {
+      emit(PickedImageState(image: image));
+    } else {
+      emit(LoadingImageState());
+    }
   } catch (e) {
     print(e);
   }

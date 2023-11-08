@@ -42,11 +42,11 @@ class _BottomMenuState extends State<BottomMenu> {
                       Icons.home,
                       color: mBackgroundColor,
                     ),
-                    onTap: () => SharedFunction.navigatorPushFunction(
-                        context,
-                        const PlayerHome(
-                          isOwner: false,
-                        )),
+                    // onTap: () => SharedFunction.navigatorPushFunction(
+                    //     context,
+                    //     const PlayerHome(
+                    //       isOwner: false,
+                    //     )),
                   ),
                   GestureDetector(
                     onTap: () {},

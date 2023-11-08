@@ -77,7 +77,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
             if (state is LoginRegisterLoading) {
               const CircularProgressIndicator();
             } else if (state is LoginRegisterLoaded) {
-              navigateToHomePage();
+              // navigateToHomePage();
             } else if (state is LoginRegisterFailure) {
               const Text("Something is wrong !");
             }
@@ -361,16 +361,18 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
                               ),
                             ),
                             onPressed: () async {
-                               _handelSignUp();
-                               PlayerInfo newPlayerModel = await playerModelData();
+                              _handelSignUp();
+                              PlayerInfo newPlayerModel =
+                                  await playerModelData();
 
-                               BlocProvider.of<LoginRegisterBlocBloc>(context).add(
-                                 PlayerSignUpEvent(
-                                   playerInfo: newPlayerModel,
-                                   email: _emailController.text,
-                                   password: _passwordController.text,
-                                 ),
-                               );
+                              BlocProvider.of<LoginRegisterBlocBloc>(context)
+                                  .add(
+                                PlayerSignUpEvent(
+                                  playerInfo: newPlayerModel,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                ),
+                              );
                             },
                             child: const Padding(
                               padding: EdgeInsets.only(
@@ -391,6 +393,7 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
       ),
     );
   }
+
   void _handelSignUp() async {
     if (_phoneNumberController.text.isNotEmpty) {
       setState(() {
@@ -413,17 +416,17 @@ class _PlayerSignUpState extends State<PlayerSignUp> {
     }
   }
 
-  void navigateToHomePage() {
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) =>  PlayerHome(
-          isOwner: false,
-        ),
-      ),
-      (route) => false,
-    );
-  }
+  // void navigateToHomePage() {
+  //   Navigator.pushAndRemoveUntil(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) =>  PlayerHome(
+  //         isOwner: false,
+  //       ),
+  //     ),
+  //     (route) => false,
+  //   );
+  // }
 
   Future<PlayerInfo> playerModelData() async {
     PlayerInfo newPlayerModel = PlayerInfo(

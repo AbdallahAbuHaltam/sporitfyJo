@@ -6,13 +6,13 @@ sealed class AddEditEvent {}
 class ChoosingImageEvent extends AddEditEvent {}
 
 class AddPlaygroundEvent extends AddEditEvent {
-  final PlaygroundInfo playgroundModel;
+  final SubPlaygroundModel playgroundModel;
 
   AddPlaygroundEvent({required this.playgroundModel});
 }
 
 class EditPlaygroundEvent extends AddEditEvent {
-  final PlaygroundInfo newPlaygroundModel;
+  final SubPlaygroundModel newPlaygroundModel;
 
   EditPlaygroundEvent({required this.newPlaygroundModel});
 }

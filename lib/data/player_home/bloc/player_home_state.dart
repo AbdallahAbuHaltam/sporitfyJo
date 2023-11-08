@@ -10,7 +10,7 @@ class LoadingState extends PlayerHomeState {}
 class FailureState extends PlayerHomeState {}
 
 class LoadedAllPlaygroundState extends PlayerHomeState {
-  final List<PlaygroundInfo> playgroungList;
+  final List<MainPlaygroundModel> playgroungList;
 
   LoadedAllPlaygroundState({required this.playgroungList});
 }

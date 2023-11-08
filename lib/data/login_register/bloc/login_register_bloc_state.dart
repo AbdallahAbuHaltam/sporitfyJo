@@ -12,3 +12,5 @@ final class LoginRegisterLoaded extends LoginRegisterBlocState {}
 final class LoginRegisterFailure extends LoginRegisterBlocState {}
 
 class LogoutState extends LoginRegisterBlocState {}
+
+class CreateNewPlaygroundState extends LoginRegisterBlocState {}
