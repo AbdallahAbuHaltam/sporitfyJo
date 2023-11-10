@@ -132,6 +132,12 @@ TextStyle homePriceFont = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
   decoration: TextDecoration.none,
 );
+TextStyle homePriceFont2 = GoogleFonts.poppins(
+  fontSize: 12,
+  color: mPrimaryColor,
+  fontWeight: FontWeight.bold,
+  decoration: TextDecoration.none,
+);
 TextStyle timelineBookFont = GoogleFonts.poppins(
   fontSize: 17,
   color: dark,
